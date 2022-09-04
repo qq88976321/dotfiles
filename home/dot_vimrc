@@ -1,0 +1,35 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" inspired by:
+"    - https://github.com/amix/vimr
+"    - https://github.com/iggredible/Learn-Vim
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Need to install vim-plug: https://github.com/junegunn/vim-plug#vim
+call plug#begin('~/.vim/plugged')
+
+Plug 'dense-analysis/ale'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'scrooloose/nerdcommenter'
+Plug 'preservim/nerdtree'
+Plug 'Yggdroot/indentLine'
+Plug 'vim-airline/vim-airline'
+Plug 'tomasiser/vim-code-dark'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'sheerun/vim-polyglot'
+Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] } " On-demand lazy load
+Plug 'takac/vim-hardtime'
+
+call plug#end()
+
+" General Settings
+source ~/.vim/settings/general.vim
+
+" Plugins Settings
+source ~/.vim/settings/plugins.vim
+
+

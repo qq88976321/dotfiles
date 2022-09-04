@@ -1,0 +1,58 @@
+###############################################################
+# Variables setting
+###############################################################
+set refresh-mode = auto
+set line-graphics = utf-8
+
+# number of spaces to use when expanding tabs
+set tab-size = 4
+
+# only ignore end-of-line space
+# set ignore-space = at-eol
+set ignore-space = yes
+# "smart-case" ignores case if the search string doesn’t contain any uppercase letters
+set ignore-case = smart-case
+
+# Download diff-highlight script from git repo
+set diff-highlight = true
+set diff-options = --patience
+set diff-context = 10
+
+###############################################################
+# View settings
+###############################################################
+set main-view   = date id author:email-user commit-title:graph=yes,refs=yes
+set blame-view  = date:default author:email-user id:yes,color line-number:yes,interval=1 text
+set pager-view  = line-number:yes,interval=1 text
+set stage-view  = line-number:yes,interval=1 text
+set log-view    = line-number:yes,interval=1 text
+set blob-view   = line-number:yes,interval=1 text
+set diff-view   = line-number:yes,interval=1 text:yes,commit-title-overflow=no
+
+
+###############################################################
+# Bind command
+###############################################################
+# set key 'g' / goto file top
+bind generic g      move-first-line
+bind main    g      move-first-line
+
+# set key 'G' / goto file bottom
+bind generic G      move-last-line
+bind main    G      move-last-line
+
+# set key 'R' to start git rebase
+bind main R !git rebase -i %(commit)^
+
+# set key 'F' to fixup the commit
+bind main F !git commit --fixup=%(commit)
+
+# copy commit ID to clipboard:
+{{- if eq .chezmoi.os "linux" }}
+{{-   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+{{- /* WSL-specific code */}}
+bind generic c !@sh -c "echo -n %(commit) | clip.exe"
+{{-   else }}
+bind generic c !@sh -c "echo -n %(commit) | xclip -selection c"
+{{-   end }}
+{{- end }}
