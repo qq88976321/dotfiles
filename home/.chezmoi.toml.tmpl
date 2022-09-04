@@ -1,0 +1,11 @@
+{{- $name := promptStringOnce . "name" "Username" -}}
+{{- $email := promptStringOnce . "email" "Email address" -}}
+{{- $signingkey := promptStringOnce . "signingkey" "GnuPG signature key" -}}
+{{- $private_git_repo := promptStringOnce . "private_git_repo" "Private git repository" -}}
+
+[data]
+name = {{ $name | quote }}
+email = {{ $email | quote }}
+signingkey = {{ $signingkey | quote }}
+private_git_repo = {{ $private_git_repo | quote }}
+
