@@ -116,6 +116,10 @@ alias p='poetry'
 # chezmoi
 alias c='chezmoi'
 
+# change the directory of current shell to chezmoi's source directory
+ccd() {
+    cd $(chezmoi source-path)
+}
 
 # Set the WORDCHARS variable after Oh My Zsh is sourced.
 # I want hyphen and underscore to also be a part of a word.
