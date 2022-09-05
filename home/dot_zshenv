@@ -16,6 +16,8 @@ export GPG_TTY=$(tty)
 ulimit -S -c 0  # core dumpsize
 umask 022
 
+# user's executables binary
+export PATH="$HOME/.local/bin:$PATH"
 
 ###############################################################
 # oh-my-zsh
