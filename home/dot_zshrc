@@ -88,7 +88,7 @@ plugins=(
   zsh-autosuggestions
 )
 
-source $ZSH/oh-my-zsh.sh
+source "$ZSH"/oh-my-zsh.sh
 
 ###############################################################
 # User configuration
@@ -118,7 +118,7 @@ alias c='chezmoi'
 
 # change the directory of current shell to chezmoi's source directory
 ccd() {
-    cd $(chezmoi source-path)
+    cd "$(chezmoi source-path)" || exit
 }
 
 # Set the WORDCHARS variable after Oh My Zsh is sourced.
@@ -129,9 +129,9 @@ WORDCHARS='_-'
 ###############################################################
 # Powerlevel10k
 ###############################################################
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-if [[ -f ~/.p10k.zsh ]] then
-  source ~/.p10k.zsh
+# To customize prompt, run `p10k configure` or edit $HOME/.p10k.zsh.
+if [[ -f "$HOME/.p10k.zsh" ]]; then
+  source "$HOME/.p10k.zsh"
 else
   echo "p10k: init script not found. Please check: https://github.com/romkatv/powerlevel10k#installation"
 fi
@@ -139,8 +139,8 @@ fi
 ###############################################################
 # fuzzy finder
 ###############################################################
-if [[ -f ~/.fzf.zsh ]] then
-  source ~/.fzf.zsh
+if [[ -f "$HOME/.fzf.zsh" ]]; then
+  source "$HOME/.fzf.zsh"
 else
   echo "fzf: init script not found. Please check: https://github.com/junegunn/fzf#installation"
 fi
