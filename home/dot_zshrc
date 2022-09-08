@@ -158,7 +158,7 @@ fi
 ###############################################################
 # pyenv
 ###############################################################
-if [[ -x "$(command -v thefuck)" ]]; then
+if [[ -d "$HOME/.pyenv" ]]; then
   eval "$(pyenv init -)"
   eval "$(pyenv virtualenv-init -)"
 else
@@ -181,7 +181,7 @@ if [[ -x "$(command -v chezmoi)" ]]; then
   source <(chezmoi completion zsh)
   compdef _chezmoi chezmoi
 else
-  echo "thefuck: command not found. Please check: https://www.chezmoi.io/install"
+  echo "chezmoi: command not found. Please check: https://www.chezmoi.io/install"
 fi
 
 ###############################################################
