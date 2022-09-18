@@ -1,0 +1,25 @@
+{{- if .is_desktop_env -}}
+
+#!/usr/bin/env bash
+
+# Exit on an Error or if an Unset variable is referenced.
+set -eu
+
+# When used in combination with set -e, pipefail will make a script exit if any command in a pipeline errors.
+set -o pipefail
+
+# Print a trace of simple commands and their arguments after they are expanded and before they are executed.
+set -x
+
+if [[ ! -x $(command -v pulseaudio-control) ]]; then
+    # https://github.com/marioortizmanero/polybar-pulseaudio-control#other-linux
+
+    LATEST_TAG=$(git ls-remote --tags --sort="v:refname" https://github.com/marioortizmanero/polybar-pulseaudio-control.git | tail -n1 | sed 's/.*\///; s/\^{}//')
+    curl -fsSL https://raw.githubusercontent.com/marioortizmanero/polybar-pulseaudio-control/"$LATEST_TAG"/pulseaudio-control.bash --output ~/.local/bin/pulseaudio-control
+    chmod +x ~/.local/bin/pulseaudio-control
+else
+    echo "[INFO] pulseaudio-control is already installed."
+fi
+
+
+{{- end -}}

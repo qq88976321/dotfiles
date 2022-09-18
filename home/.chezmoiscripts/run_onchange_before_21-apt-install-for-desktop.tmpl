@@ -1,0 +1,28 @@
+{{- if .is_desktop_env -}}
+
+#!/usr/bin/env bash
+
+# Exit on an Error or if an Unset variable is referenced.
+set -eu
+
+# When used in combination with set -e, pipefail will make a script exit if any command in a pipeline errors.
+set -o pipefail
+
+# Print a trace of simple commands and their arguments after they are expanded and before they are executed.
+set -x
+
+sudo apt-get install -yq \
+    code \
+    i3 \
+    i3lock-fancy \
+    rofi \
+    kolourpaint \
+    flameshot \
+    x11-xkb-utils \
+    xcape
+
+# install polybar dependencies
+sudo apt-get install -yq build-essential git cmake cmake-data pkg-config python3-sphinx python3-packaging libuv1-dev libcairo2-dev libxcb1-dev libxcb-util0-dev libxcb-randr0-dev libxcb-composite0-dev python3-xcbgen xcb-proto libxcb-image0-dev libxcb-ewmh-dev libxcb-icccm4-dev
+
+
+{{- end -}}
