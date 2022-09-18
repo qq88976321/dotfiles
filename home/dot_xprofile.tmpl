@@ -1,0 +1,9 @@
+{{- if .is_desktop_env -}}
+
+# Map Caps Lock to Ctrl.
+setxkbmap -option 'caps:ctrl_modifier'
+
+# Generate Escpe key when Caps is pressed and released on its own.
+xcape -e 'Caps_Lock=Escape'
+
+{{- end }}
