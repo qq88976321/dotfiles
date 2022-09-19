@@ -214,6 +214,9 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Start applications on specific workspaces when i3 starts
 exec --no-startup-id i3-msg 'workspace $ws1; exec $(which gnome-terminal)'
+exec --no-startup-id i3-msg 'workspace $ws2; exec $(which code)'
+exec --no-startup-id i3-msg 'workspace $ws3; exec $(which google-chrome-stable)'
+exec --no-startup-id i3-msg 'workspace $ws9; exec ~/.joplin/Joplin.AppImage'
 
 
 {{- end }}
