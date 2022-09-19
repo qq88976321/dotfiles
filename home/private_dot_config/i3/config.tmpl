@@ -201,6 +201,9 @@ bindsym $mod+r mode "resize"
 # Custom setup
 ###############################################################
 
+# hide title bar
+for_window [class="^.*"] border pixel 1
+
 focus_follows_mouse yes
 
 bindsym Print exec flameshot gui
