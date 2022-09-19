@@ -198,6 +198,16 @@ mode "resize"{
 bindsym $mod+r mode "resize"
 
 ###############################################################
+# Custom keybind
+###############################################################
+
+# flameshot
+bindsym Print exec flameshot gui
+
+# system lock
+bindsym $mod+Ctrl+l exec i3lock-fancy -t "Type password to unlock"
+
+###############################################################
 # Custom setup
 ###############################################################
 
@@ -206,8 +216,6 @@ for_window [class="^.*"] border pixel 1
 
 focus_follows_mouse yes
 
-bindsym Print exec flameshot gui
-bindsym $mod+Ctrl+l exec i3lock-fancy -t "Type password to unlock"
 
 # Start polybar (replace i3bar)
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
