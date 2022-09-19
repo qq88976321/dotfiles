@@ -1,0 +1,15 @@
+{{- if eq .chezmoi.hostname "2700x-linux" -}}
+
+#!/usr/bin/pulseaudio -nF
+
+.include /etc/pulse/default.pa
+
+# hear the capture card's captured audio
+# use `pactl list [sources|sinks] short` to get the right id
+load-module module-loopback source=alsa_input.pci-0000_0c_00.3.analog-stereo sink=alsa_output.usb-TEAC_Corporation_TEAC_UD-301_000400004FBC5F014E452829800F0018-00.analog-stereo
+
+# setup default sink and default source
+set-default-sink alsa_output.usb-TEAC_Corporation_TEAC_UD-301_000400004FBC5F014E452829800F0018-00.analog-stereo
+set-default-source alsa_input.usb-AVerMedia_Technologies__Inc_AVerMedia_PW310P_20210309004-02.analog-stereo
+
+{{- end }}
