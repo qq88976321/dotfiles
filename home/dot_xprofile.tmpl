@@ -6,4 +6,14 @@ setxkbmap -option 'caps:ctrl_modifier'
 # Generate Escpe key when Caps is pressed and released on its own.
 xcape -e 'Caps_Lock=Escape'
 
+{{-     if eq .chezmoi.hostname "2700x-linux" }}
+
+# Setup my 2k 144hz monitor.
+xrandr --output DP-0 --mode 2560x1440 --rate 120.00
+
+# Setup mouse speed
+xinput set-prop 'pointer:Logitech MX Master 3' 'libinput Accel Speed' -0.4
+
+{{-     end }}
+
 {{- end }}
