@@ -220,6 +220,11 @@ focus_follows_mouse yes
 # Start polybar (replace i3bar)
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
+# Fix chrome password manager
+# Also need to edit /usr/share/applications/google-chrome.desktop and append --password-store=gnome to Exec
+# https://www.reddit.com/r/i3wm/comments/81i9tl/comment/dv5lybs/
+exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
+
 # Start applications on specific workspaces when i3 starts
 exec --no-startup-id i3-msg 'workspace $ws1; exec $(which gnome-terminal)'
 exec --no-startup-id i3-msg 'workspace $ws2; exec $(which code)'
