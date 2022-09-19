@@ -1,9 +1,13 @@
+{{- $is_desktop_env := promptBoolOnce . "is_desktop_env" "[GUI] Does this machine need desktop enviroment and applications (y/n)" -}}
+
 {{- $name := promptStringOnce . "name" "[Git] Username" -}}
 {{- $email := promptStringOnce . "email" "[Git] Email address" -}}
 {{- $signingkey := promptStringOnce . "signingkey" "[Git] GnuPG signature key" -}}
 {{- $private_git_repo := promptStringOnce . "private_git_repo" "[Git] Private git repository" -}}
 
 [data]
+is_desktop_env = {{ $is_desktop_env | quote}}
+
 name = {{ $name | quote }}
 email = {{ $email | quote }}
 signingkey = {{ $signingkey | quote }}
