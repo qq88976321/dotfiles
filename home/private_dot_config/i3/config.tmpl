@@ -214,8 +214,13 @@ bindsym $mod+Ctrl+l exec i3lock-fancy -t "Type password to unlock"
 # hide title bar
 for_window [class="^.*"] border pixel 1
 
-focus_follows_mouse yes
+focus_follows_mouse no
 
+# disable mouse warping when switching focus to a window on a different monitor
+mouse_warping none
+
+# automatic back-and-forth when switching to the current workspace
+workspace_auto_back_and_forth yes
 
 # Start polybar (replace i3bar)
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
