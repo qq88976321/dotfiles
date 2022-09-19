@@ -29,6 +29,8 @@ alert = #A54242
 disabled = #707880
 
 [bar/base]
+monitor = ${env:MONITOR:}
+
 width = 100%
 
 background = ${colors.background}
@@ -77,6 +79,8 @@ label-mode-padding = 1
 
 
 [module/xworkspaces]
+pin-workspaces = true
+
 type = internal/xworkspaces
 reverse-scroll = true
 
