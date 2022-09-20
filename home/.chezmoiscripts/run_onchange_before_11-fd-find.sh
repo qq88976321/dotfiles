@@ -20,8 +20,3 @@ if [[ ! -x $(command -v fd) ]]; then
 else
     echo "[INFO] fd-find is already installed."
 fi
-
-
-
-
-
