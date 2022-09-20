@@ -116,6 +116,9 @@ alias p='poetry'
 # chezmoi
 alias c='chezmoi'
 
+# tig
+alias t='tig'
+
 # change the directory of current shell to chezmoi's source directory
 ccd() {
     cd "$(chezmoi source-path)" || exit
