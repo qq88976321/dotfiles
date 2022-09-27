@@ -1,3 +1,5 @@
+{{- if .is_desktop_env -}}
+
 [global]
     ### Display ###
 
@@ -413,3 +415,5 @@
 #    set_stack_tag = "volume"
 #
 # vim: ft=cfg
+
+{{- end }}
