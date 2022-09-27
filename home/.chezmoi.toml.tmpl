@@ -6,7 +6,7 @@
 {{- $private_git_repo := promptStringOnce . "private_git_repo" "[Git] Private git repository" -}}
 
 [data]
-is_desktop_env = {{ $is_desktop_env | quote}}
+is_desktop_env = {{ $is_desktop_env }}
 
 name = {{ $name | quote }}
 email = {{ $email | quote }}
