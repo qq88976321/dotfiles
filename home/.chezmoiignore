@@ -1,2 +1,11 @@
 .oh-my-zsh/cache/**
 .oh-my-zsh/custom/themes/powerlevel10k/**/*.zwc
+
+{{ if eq .is_desktop_env false }}
+.config/dunst
+.config/i3
+.config/gtk-3.0
+.config/polybar
+.config/pulse
+.config/rofi
+{{ end }}
