@@ -124,7 +124,7 @@ interval = 1
 
 date = %Y/%m/%d(%a) %H:%M:%S
 
-label = %date%
+label = %{A1:LC_ALL=en_US.UTF-8 gsimplecal:} %date% %{A}
 label-foreground = ${colors.primary}
 
 
