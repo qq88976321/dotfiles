@@ -16,7 +16,6 @@ if [[ ! -x $(command -v fd) ]]; then
     curl -fsSL https://github.com/sharkdp/fd/releases/download/"$LATEST_TAG"/fd_"$LATEST_TAG_WITHOUT_V_PREFIX"_amd64.deb --output /tmp/fd_"$LATEST_TAG_WITHOUT_V_PREFIX"_amd64.deb
 
     sudo dpkg -i /tmp/fd_8.4.0_amd64.deb
-    ln -s "$(which fdfind)" ~/.local/bin/fd
 else
     echo "[INFO] fd-find is already installed."
 fi
