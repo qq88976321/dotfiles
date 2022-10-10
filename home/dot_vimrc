@@ -1,26 +1,52 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " inspired by:
-"    - https://github.com/amix/vimr
-"    - https://github.com/iggredible/Learn-Vim
+"    - <https://github.com/amix/vimr>
+"    - <https://github.com/iggredible/Learn-Vim>
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Need to install vim-plug: https://github.com/junegunn/vim-plug#vim
+" Need to install vim-plug: <https://github.com/junegunn/vim-plug#vim>
 call plug#begin('~/.vim/plugged')
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Language - Plugins or syntax highlighting for a language or library
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'dense-analysis/ale'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'scrooloose/nerdcommenter'
-Plug 'preservim/nerdtree'
 Plug 'Yggdroot/indentLine'
-Plug 'vim-airline/vim-airline'
-Plug 'tomasiser/vim-code-dark'
-Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'sheerun/vim-polyglot'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Completion - Plugins that reduce typing and complete code
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Code Display - Plugins and color schemes that enhance code display
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'scrooloose/nerdcommenter'
+Plug 'tomasiser/vim-code-dark'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Integrations - Plugins that integrate Vim with external tools or the OS
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'preservim/nerdtree'
+Plug 'airblade/vim-gitgutter'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Interface - Plugins that add or change a UI element
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'junegunn/fzf.vim'
+Plug 'vim-airline/vim-airline'
 Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] } " On-demand lazy load
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Commands - Plugins that introduce or change a Vim command
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Other - Plugins that don't belong in other categories
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'editorconfig/editorconfig-vim'
 Plug 'takac/vim-hardtime'
 
 call plug#end()
@@ -30,5 +56,3 @@ source ~/.vim/settings/general.vim
 
 " Plugins Settings
 source ~/.vim/settings/plugins.vim
-
-

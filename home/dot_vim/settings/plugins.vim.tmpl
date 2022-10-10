@@ -11,18 +11,6 @@ let b:ale_fix_on_save = 1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" junegunn/fzf
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Determines the size and position of fzf window
-let g:fzf_layout = { 'down': '~40%' }
-
-nmap <C-P> :FZF<CR>
-nmap <C-P> :FZF<CR>
-
-nmap <C-S-F> :Ag<CR>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Yggdroot/indentLine
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use the same colors as SpecialKey highlight group
@@ -30,6 +18,26 @@ let g:indentLine_defaultGroup = 'SpecialKey'
 
 " Change indent char
 let g:indentLine_char = '|'
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" fatih/vim-go
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:go_fmt_command = "goimports"
+{{- if .private_git_repo }}
+let g:go_fmt_options = "-local={{ .private_git_repo }}"
+{{- end }}
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+let g:go_autodetect_gopath = 1
+let g:go_list_type = "quickfix"
+
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_generate_tags = 1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -56,10 +64,19 @@ let g:NERDTrimTrailingWhitespace = 1
 " Enable NERDCommenterToggle to check all selected lines is commented or not
 let g:NERDToggleCheckAllLines = 1
 
-
 " Map <C-/> to toggle comments in normal and visual mode
 nmap <C-_> <Plug>NERDCommenterToggle
 vmap <C-_> <Plug>NERDCommenterToggle<CR>gv
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" tomasiser/vim-code-dark
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" override special key group color (for lighter space and tab color)
+highlight SpecialKey guifg='#4e4e4e' ctermfg=239
+
+" override the color of the selected code (make difference with the highlighted result)
+highlight Visual term=reverse cterm=reverse guibg=Grey
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -78,36 +95,6 @@ let g:airline_powerline_fonts=1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" tomasiser/vim-code-dark
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" override special key group color (for lighter space and tab color)
-highlight SpecialKey guifg='#4e4e4e' ctermfg=239
-
-" override the color of the selected code (make difference with the highlighted result)
-highlight Visual term=reverse cterm=reverse guibg=Grey
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" fatih/vim-go
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:go_fmt_command = "goimports"
-{{- if .private_git_repo }}
-let g:go_fmt_options = "-local={{ .private_git_repo }}"
-{{- end }}
-let g:go_def_mode='gopls'
-let g:go_info_mode='gopls'
-let g:go_autodetect_gopath = 1
-let g:go_list_type = "quickfix"
-
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_generate_tags = 1
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " liuchengxu/vim-which-key
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
@@ -115,6 +102,19 @@ nnoremap <silent> <leader> :<c-u>WhichKey '<Space>'<CR>
 
 " After pressing leader the guide buffer will pop up when there are no further keystrokes within timeoutlen.
 set timeoutlen=500
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" junegunn/fzf
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Determines the size and position of fzf window
+let g:fzf_layout = { 'down': '~40%' }
+
+nmap <C-P> :FZF<CR>
+nmap <C-P> :FZF<CR>
+
+nmap <C-S-F> :Ag<CR>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TODO: learn vim and kick the bad habits
