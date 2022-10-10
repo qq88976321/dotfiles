@@ -32,7 +32,8 @@ au FocusGained,BufEnter * checktime
 let mapleader = "\<space>"
 
 " Paste copied text from the external program with just p
-set clipboard=unnamedplus
+" NOTE: vim --version should have the +clipboard or +xterm_clipboard flags
+set clipboard^=unnamed,unnamedplus
 
 set updatetime=100
 
