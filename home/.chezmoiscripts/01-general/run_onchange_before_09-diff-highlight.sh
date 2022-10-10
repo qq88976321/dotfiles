@@ -20,4 +20,3 @@ if [[ ! -x $(command -v diff-highlight) ]]; then
 else
     echo "[INFO] diff-highlight is already installed."
 fi
-

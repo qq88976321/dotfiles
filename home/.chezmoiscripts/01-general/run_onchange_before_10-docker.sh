@@ -32,4 +32,3 @@ if [[ ! -x $(command -v docker) ]]; then
 else
     echo "[INFO] docker is already installed."
 fi
-
