@@ -11,14 +11,14 @@ set -o pipefail
 # Print a trace of simple commands and their arguments after they are expanded and before they are executed.
 set -x
 
-sudo apt-get install -yq \
-    i3 \
-    rofi \
-    i3lock-fancy \
-    flameshot
+mkdir -p ~/.local/share/fonts
 
-# install polybar dependencies
-sudo apt-get install -yq build-essential git cmake cmake-data pkg-config python3-sphinx python3-packaging libuv1-dev libcairo2-dev libxcb1-dev libxcb-util0-dev libxcb-randr0-dev libxcb-composite0-dev python3-xcbgen xcb-proto libxcb-image0-dev libxcb-ewmh-dev libxcb-icccm4-dev
+# ref: https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
+curl -fsSL https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf --output ~/.local/share/fonts/MesloLGS\ NF\ Regular.ttf
+curl -fsSL https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf --output ~/.local/share/fonts/MesloLGS\ NF\ Bold.ttf
+curl -fsSL https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf --output ~/.local/share/fonts/MesloLGS\ NF\ Italic.ttf
+curl -fsSL https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf --output ~/.local/share/fonts/MesloLGS\ NF\ Bold\ Italic.ttf
 
+fc-cache -f -v
 
 {{- end -}}
