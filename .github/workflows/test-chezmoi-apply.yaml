@@ -1,0 +1,36 @@
+name: Test chezmoi apply
+run-name: Test chezmoi apply
+on:
+  push:
+    paths:
+      - 'home/**'
+jobs:
+  test-doctilfes-installation:
+    strategy:
+      matrix:
+          os: [ubuntu-20.04, ubuntu-22.04]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: post-checkout # FIXME: https://github.com/actions/checkout/issues/197
+        run: |
+          mkdir -p /home/runner/.local/share
+          cp -r /home/runner/work/dotfiles/dotfiles /home/runner/.local/share/chezmoi
+      - name: Setup PATH
+        run: echo "$HOME/.local/bin" >> $GITHUB_PATH
+      - name: Install chezmoi
+        run: sh -c "$(curl -fsLS https://chezmoi.io/get)" -- -b $HOME/.local/bin
+      - name: Setup chezmoi.toml
+        run: |
+          mkdir -p $HOME/.config/chezmoi
+          cat <<EOF > $HOME/.config/chezmoi/chezmoi.toml
+          [data]
+          is_desktop_env = true
+
+          name = "github-action"
+          email = "github-action@gmail.com"
+          signingkey = ""
+          private_git_repo = ""
+          EOF
+      - name: Install dotfiles using chezmoi
+        run: chezmoi apply
