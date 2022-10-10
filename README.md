@@ -1,5 +1,9 @@
 # Dotfiles <!-- omit in toc -->
 
+![test-chezmoi-apply](https://github.com/qq88976321/dotfiles/actions/workflows/test-chezmoi-apply.yaml/badge.svg)
+![ubuntu-20.04](https://img.shields.io/badge/ubuntu-20.04-blue)
+![ubuntu-22.04](https://img.shields.io/badge/ubuntu-22.04-blue)
+
 My linux dotfiles and daily used tools, managed with [chezmoi](https://www.chezmoi.io). Mainly used on Ubuntu 20.04 Desktop / Server and seldomly used on Ubuntu 20.04 WSL. (The installation scripts for some tools are currently not supported on Ubuntu 18.04.)
 
 ## Table of Contents <!-- omit in toc -->
