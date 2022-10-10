@@ -13,7 +13,11 @@ set -x
 
 # Install or update Joplin
 # https://github.com/laurent22/joplin#desktop-applications
-wget -O - https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh | bash
 
+{{ if ne .chezmoi.username "root" -}}
+wget -O - https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh | bash
+{{ else}}
+echo "[INFO] It is not recommended (nor necessary) to install joplin as root."
+{{ end -}}
 
 {{- end -}}
