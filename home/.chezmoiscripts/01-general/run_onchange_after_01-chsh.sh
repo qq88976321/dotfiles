@@ -9,4 +9,4 @@ set -o pipefail
 # Print a trace of simple commands and their arguments after they are expanded and before they are executed.
 set -x
 
-sudo chsh -s "$(which zsh)" $(whoami)
+sudo chsh -s "$(which zsh)" "$(whoami)"
