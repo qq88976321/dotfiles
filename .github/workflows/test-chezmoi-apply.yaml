@@ -2,8 +2,8 @@ name: Test chezmoi apply
 run-name: Test chezmoi apply
 on:
   push:
-    paths:
-      - 'home/**'
+    paths-ignore:
+      - '**/*.md'
 jobs:
   test-doctilfes-installation:
     strategy:
