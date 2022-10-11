@@ -18,6 +18,7 @@ set -x
 {{ $sudo }} apt-get install -yq \
     autojump \
     curl \
+    fd-find \
     git \
     htop \
     jq \
@@ -33,3 +34,7 @@ set -x
     wget \
     xclip \
     zsh
+
+# ref: https://github.com/sharkdp/fd#on-debian
+mkdir -p ~/.local/bin
+ln -s $(which fdfind) ~/.local/bin/fd
