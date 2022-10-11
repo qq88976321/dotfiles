@@ -4,7 +4,7 @@
 ![ubuntu-20.04](https://img.shields.io/badge/ubuntu-20.04-blue)
 ![ubuntu-22.04](https://img.shields.io/badge/ubuntu-22.04-blue)
 
-My linux dotfiles and daily used tools, managed with [chezmoi](https://www.chezmoi.io). Mainly used on Ubuntu 20.04 Desktop / Server and seldomly used on Ubuntu 20.04 WSL. (The installation scripts for some tools are currently not supported on Ubuntu 18.04.)
+My linux dotfiles and daily used tools, managed with [chezmoi](https://www.chezmoi.io). Mainly used on Ubuntu 20.04 Desktop / Server and seldomly used on Ubuntu 20.04 / 22.04 WSL. (The installation scripts for some tools are currently not supported on Ubuntu 18.04.)
 
 ## Table of Contents <!-- omit in toc -->
 
@@ -34,7 +34,7 @@ i3, polybar, gnome terminal, tmux, zsh and vim
 
 **NOTE**: These dotfiles and tools are customized according to personal preferences and development needs. Therefore, you are advised to review the code and remove what you don't want or need (especially the scripts in the `.chezmoiscripts` folder).
 
-Install the `chezmoi` command and dotfiles from this GitHub dotfile repo on a new machine with a this command:
+Install the `chezmoi` command and dotfiles from this GitHub dotfile repo on a new machine with this command:
 
 ```sh
 # Option 1: installed by curl
@@ -44,7 +44,7 @@ $ sh -c "$(wget -qO- https://chezmoi.io/get)" -- init --apply qq88976321
 
 # And then fill in prompts or just leave it empty if you don't need it
 # The config file, typically ~/.config/chezmoi/chezmoi.toml, is specific to the local machine.
-# [GUI] Does this machine need desktop enviroment and applications (y/n)?
+# [GUI] Does this machine need desktop environment and applications (y/n)?
 # [Git] Username?
 # [Git] Email address?
 # [Git] GnuPG signature key?
@@ -57,7 +57,7 @@ Please take a look at [Meslo Nerd Font patched for Powerlevel10k](https://github
 
 ## Key Bindings
 
-Here are the my daily used key bindings, which may not include all the default key bindings.
+Here are my daily used key bindings, which may not include all the key bindings supported by these tools.
 
 ### [i3](https://github.com/i3/i3)
 
@@ -65,7 +65,7 @@ Here are the my daily used key bindings, which may not include all the default k
 | --------------------------------------- | -------------------------------------------- |
 | `win` (Mod4)                            | modifier                                     |
 | $mod+`enter`                            | open terminal                                |
-| $mod+`shift`+`q`                        | close focuesd window                         |
+| $mod+`shift`+`q`                        | close focused window                         |
 | $mod+`d`                                | open rofi                                    |
 | $mod+`h` / $mod+`Left`                  | focus left                                   |
 | $mod+`j` / $mod+`Down`                  | focus down                                   |
@@ -77,7 +77,7 @@ Here are the my daily used key bindings, which may not include all the default k
 | $mod+`shift`+`l` / $mod+`shift`+`Right` | move focused window right                    |
 | $mod+`shift`+`space`                    | toggle tiling / floating                     |
 | $mod+<0 to 9>                           | switch to workspace <0 to 9>                 |
-| $mod+`shift`+<0 to 9>                   | move focuesd container to workspace <0 to 9> |
+| $mod+`shift`+<0 to 9>                   | move focused container to workspace <0 to 9> |
 | $mod+`shift`+`c`                        | reload the configuration file                |
 | $mod+`shift`+`r`                        | restart i3 inplace                           |
 | $mod+`shift`+`e`                        | exit i3                                      |
@@ -149,7 +149,7 @@ First press the prefix key `ctrl`+`space`, released and then press the key liste
 
 | key | description                  |
 | --- | ---------------------------- |
-| `c` | copy commit id to clickboard |
+| `c` | copy commit id to clipboard |
 
 #### Main bindings
 

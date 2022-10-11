@@ -1,4 +1,4 @@
-{{- $is_desktop_env := promptBoolOnce . "is_desktop_env" "[GUI] Does this machine need desktop enviroment and applications (y/n)" -}}
+{{- $is_desktop_env := promptBoolOnce . "is_desktop_env" "[GUI] Does this machine need desktop environment and applications (y/n)" -}}
 
 {{- $name := promptStringOnce . "name" "[Git] Username" -}}
 {{- $email := promptStringOnce . "email" "[Git] Email address" -}}
@@ -12,4 +12,3 @@ name = {{ $name | quote }}
 email = {{ $email | quote }}
 signingkey = {{ $signingkey | quote }}
 private_git_repo = {{ $private_git_repo | quote }}
-
