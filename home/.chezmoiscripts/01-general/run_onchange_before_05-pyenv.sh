@@ -19,11 +19,6 @@ if [[ ! -x $(command -v pyenv) ]]; then
     sudo apt-get install -yq make build-essential libssl-dev zlib1g-dev \
         libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
         libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
-
-    # Setup default python version to the latest stable version
-    VERSION=$(pyenv install --list | grep "^\s*[0-9]*.[0-9]*.[0-9]*$" | tail -n 1 | sed 's/ //g')
-    pyenv install "$VERSION"
-    pyenv global "$VERSION"
 else
     echo "[INFO] pyenv is already installed."
 fi
