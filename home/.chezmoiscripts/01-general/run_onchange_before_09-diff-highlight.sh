@@ -17,6 +17,8 @@ if [[ ! -x $(command -v diff-highlight) ]]; then
     make diff-highlight
     mkdir -p ~/.local/bin
     install diff-highlight ~/.local/bin
+
+    rm -rf /tmp/git/
 else
     echo "[INFO] diff-highlight is already installed."
 fi

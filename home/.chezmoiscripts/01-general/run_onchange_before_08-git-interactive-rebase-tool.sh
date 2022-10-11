@@ -25,6 +25,8 @@ if [[ ! -x $(command -v interactive-rebase-tool) ]]; then
 
     curl -fsSL https://github.com/mitmaro/git-interactive-rebase-tool/releases/download/"$LATEST_TAG"/"$PKG_NAME" --output /tmp/"$PKG_NAME"
     sudo dpkg -i /tmp/"$PKG_NAME"
+
+    rm /tmp/"$PKG_NAME"
 else
     echo "[INFO] interactive-rebase-tool is already installed."
 fi

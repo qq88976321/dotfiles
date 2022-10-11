@@ -12,7 +12,6 @@ set -x
 if [[ ! -x $(command -v tmux) ]]; then
     # tmux dependencies
     # https://github.com/tmux/tmux/wiki/Installing#from-source-tarball
-
     sudo apt-get install -yq libevent-dev ncurses-dev build-essential bison pkg-config automake
 
     # build tmux 3 from source
@@ -22,6 +21,8 @@ if [[ ! -x $(command -v tmux) ]]; then
     sh autogen.sh
     ./configure
     make && sudo make install
+
+    rm -rf /tmp/tmux
 else
     echo "[INFO] tmux is already installed."
 fi
