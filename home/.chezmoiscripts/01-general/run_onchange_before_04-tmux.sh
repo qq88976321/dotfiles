@@ -20,7 +20,7 @@ if [[ ! -x $(command -v tmux) ]]; then
     cd /tmp/tmux
     sh autogen.sh
     ./configure
-    make && sudo make install
+    make -j"$(nproc)" && sudo make install
 
     rm -rf /tmp/tmux
 else

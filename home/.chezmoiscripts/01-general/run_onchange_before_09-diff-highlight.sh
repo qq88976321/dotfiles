@@ -14,7 +14,7 @@ if [[ ! -x $(command -v diff-highlight) ]]; then
     LATEST_TAG=$(git ls-remote --tags --sort="v:refname" https://github.com/git/git.git | tail -n1 | sed 's/.*\///; s/\^{}//')
     git clone --depth 1 --branch "$LATEST_TAG" https://github.com/git/git.git /tmp/git
     cd /tmp/git/contrib/diff-highlight
-    make diff-highlight
+    make -j"$(nproc)" diff-highlight
     mkdir -p ~/.local/bin
     install diff-highlight ~/.local/bin
 
