@@ -2,9 +2,9 @@
 
 configuration {
 	modi: "window,drun,run";
-/*	width: 50;*/
-/*	lines: 15;*/
-/*	columns: 1;*/
+	width: 600;
+	lines: 10;
+	columns: 1;
 	font: "MesloLGS NF 14";
 /*	bw: 1;*/
 /*	location: 0;*/
@@ -56,10 +56,6 @@ configuration {
 /*	click-to-exit: true;*/
 /*	show-match: true;*/
 /*	theme: ;*/
-	color-normal: "#000000, #b3e774, #000000, #b3e774, #000000";
-	color-urgent: "#000000, #b3e774, #000000, #b3e774, #000000";
-	color-active: "#000000, #b3e774, #000000, #b3e774, #000000";
-	color-window: "#000000, #000000, #000000";
 /*	max-history-size: 25;*/
 /*	combi-hide-mode-prefix: false;*/
 /*	matching-negate-char: '-' /* unsupported */;*/
@@ -84,15 +80,15 @@ configuration {
 /*	kb-remove-word-back: "Control+Alt+h,Control+BackSpace";*/
 /*	kb-remove-word-forward: "Control+Alt+d";*/
 /*	kb-remove-char-forward: "Delete,Control+d";*/
-/*	kb-remove-char-back: "BackSpace,Shift+BackSpace,Control+h";*/
+	kb-remove-char-back: "BackSpace,Shift+BackSpace";
 /*	kb-remove-to-eol: "Control+k";*/
 /*	kb-remove-to-sol: "Control+u";*/
-/*	kb-accept-entry: "Control+j,Control+m,Return,KP_Enter";*/
+	kb-accept-entry: "Control+m,Return,KP_Enter";
 /*	kb-accept-custom: "Control+Return";*/
 /*	kb-accept-alt: "Shift+Return";*/
 /*	kb-delete-entry: "Shift+Delete";*/
-/*	kb-mode-next: "Shift+Right,Control+Tab";*/
-/*	kb-mode-previous: "Shift+Left,Control+ISO_Left_Tab";*/
+	kb-mode-next: "Control+l";
+	kb-mode-previous: "Control+h";
 /*	kb-row-left: "Control+Page_Up";*/
 /*	kb-row-right: "Control+Page_Down";*/
 /*	kb-row-up: "Up,Control+p,ISO_Left_Tab";*/
@@ -145,5 +141,7 @@ configuration {
 /*	me-accept-entry: "MouseDPrimary";*/
 /*	me-accept-custom: "Control+MouseDPrimary";*/
 }
+
+@theme "~/.config/rofi/theme.rasi"
 
 {{- end }}
