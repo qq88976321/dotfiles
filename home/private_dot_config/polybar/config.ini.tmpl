@@ -67,7 +67,7 @@ background = #000000
 separator = |
 
 modules-left = xworkspaces i3
-modules-right = cpu memory wlan eth
+modules-right = cpu memory wlan eth powermenu
 
 [module/i3]
 type = internal/i3
@@ -188,5 +188,16 @@ click-left = pulseaudio-control --node-type input togmute
 click-middle = pulseaudio-control --node-type input next-node
 scroll-up = pulseaudio-control --node-type input --volume-max 100 up
 scroll-down = pulseaudio-control --node-type input --volume-max 100 down
+
+
+[module/powermenu]
+type = custom/script
+
+exec = "echo "
+click-left = ~/.config/polybar/powermenu.sh
+
+label = %output%
+label-foreground = ${colors.primary}
+label-padding-right = 1
 
 {{- end }}

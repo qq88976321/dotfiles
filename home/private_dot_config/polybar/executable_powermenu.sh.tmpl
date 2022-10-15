@@ -1,0 +1,14 @@
+{{- if .is_desktop_env -}}
+
+#!/usr/bin/env bash
+
+MENU="$(rofi -sep "|" -dmenu -i -p 'System' -width 15 -hide-scrollbar -lines 6 <<< " Lock| Logout| Reboot| Suspend| Shutdown")"
+case "$MENU" in
+    *Lock) i3lock-fancy;;
+    *Logout) i3-msg exit;;
+    *Reboot) systemctl reboot;;
+	*Suspend) systemctl suspend;;
+    *Shutdown) systemctl -i poweroff
+esac
+
+{{- end }}
