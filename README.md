@@ -18,6 +18,7 @@ My linux dotfiles and daily used tools, managed with [chezmoi](https://www.chezm
         - [tmux-yank](#tmux-yank)
             - [Normal Mode](#normal-mode)
             - [Copy Mode](#copy-mode)
+        - [tmux-open](#tmux-open)
         - [Tmux Plugin Manager](#tmux-plugin-manager)
     - [tig](#tig)
         - [Generic bindings](#generic-bindings)
@@ -81,7 +82,7 @@ Here are my daily used key bindings, which may not include all the key bindings 
 | $mod+`shift`+`c`                        | reload the configuration file                |
 | $mod+`shift`+`r`                        | restart i3 inplace                           |
 | $mod+`shift`+`e`                        | exit i3                                      |
-| $mod+`ctrl`+`l`                         | lock screen using i3lock-fancy               |
+| `Scroll Lock`                           | lock screen using i3lock-fancy               |
 | $mod+`r`                                | enter resize mode                            |
 | $mod+`mouse right click`                | resize window                                |
 
@@ -92,7 +93,7 @@ First press the prefix key `ctrl`+`space`, released and then press the key liste
 | key       | description                 |
 | --------- | --------------------------- |
 | `?`       | list all key bindings       |
-| `|`       | split window horizontally   |
+| `         | `                           | split window horizontally |
 | `-`       | split window vertically     |
 | `<arrow>` | select pane                 |
 | `p`       | previous window             |
@@ -133,6 +134,14 @@ First press the prefix key `ctrl`+`space`, released and then press the key liste
 | `y` | copy selection to system clipboard                                   |
 | `Y` | copy selection to system clipboard, and paste it to the command line |
 
+#### [tmux-open](https://github.com/tmux-plugins/tmux-open)
+
+| key         | description                                                                                         |
+| ----------- | --------------------------------------------------------------------------------------------------- |
+| `o`         | open a highlighted selection with the system default program. open for OS X or xdg-open for Linux |
+| `ctrl`-`o`  | open a highlighted selection with the $EDITOR                                                       |
+| `shift`-`s` | search the highlighted selection directly using google                                              |
+
 #### [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm)
 
 First press the prefix key `ctrl`+`space`, released and then press the key listed below.
@@ -147,8 +156,8 @@ First press the prefix key `ctrl`+`space`, released and then press the key liste
 
 #### Generic bindings
 
-| key | description                  |
-| --- | ---------------------------- |
+| key | description                 |
+| --- | --------------------------- |
 | `c` | copy commit id to clipboard |
 
 #### Main bindings
