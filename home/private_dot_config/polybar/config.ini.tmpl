@@ -182,7 +182,7 @@ type = custom/script
 tail = true
 label-foreground = ${colors.primary}
 
-exec = pulseaudio-control  --node-type input --icons-volume "" --icon-muted "" --node-blacklist "*.monitor" --format '${VOL_ICON} ${VOL_LEVEL}% ${NODE_NICKNAME}' listen
+exec = pulseaudio-control  --node-type input --icons-volume "" --icon-muted "" --node-blacklist "*.monitor" --node-nicknames-from "device.description" --format '${VOL_ICON} ${VOL_LEVEL}% ${NODE_NICKNAME}' listen
 click-right = exec pavucontrol &
 click-left = pulseaudio-control --node-type input togmute
 click-middle = pulseaudio-control --node-type input next-node
