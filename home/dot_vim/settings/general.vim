@@ -35,6 +35,9 @@ let mapleader = "\<space>"
 " NOTE: vim --version should have the +clipboard or +xterm_clipboard flags
 set clipboard=unnamed,unnamedplus
 
+" Prevent vim from clearing the clipboard on exit
+autocmd VimLeave * call system("xsel -ib", getreg('+'))
+
 set updatetime=100
 
 " Automatic undo persistence
