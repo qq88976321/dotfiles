@@ -85,6 +85,7 @@ plugins=(
   kubetail
   poetry
   pyenv
+  tmux
   zsh-syntax-highlighting
   zsh-autosuggestions
 )
