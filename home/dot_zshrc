@@ -74,6 +74,7 @@ HIST_STAMPS="yyyy-mm-dd"
 plugins=(
   autojump
   autoswitch_virtualenv
+  code-connect
   cp
   docker
   docker-compose

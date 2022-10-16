@@ -43,3 +43,9 @@ type = "archive"
 url = "https://github.com/romkatv/powerlevel10k/archive/v1.15.0.tar.gz"
 exact = true
 stripComponents = 1
+
+[".oh-my-zsh/custom/plugins/code-connect"]
+type = "archive"
+url = "https://github.com/qq88976321/code-connect/archive/feature/zsh-plugin.tar.gz"
+exact = true
+stripComponents = 1
