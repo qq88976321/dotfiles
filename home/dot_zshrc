@@ -86,6 +86,7 @@ plugins=(
   poetry
   pyenv
   tmux
+  vscode-for-tig
   zsh-syntax-highlighting
   zsh-autosuggestions
 )
