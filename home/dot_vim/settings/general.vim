@@ -53,6 +53,10 @@ set encoding=utf-8
 " Use Unix as the standard file type
 set fileformats=unix,dos,mac
 
+" Spell-check Markdown files and Git Commit Messages
+autocmd FileType markdown setlocal spell
+autocmd FileType gitcommit setlocal spell
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " -> VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
