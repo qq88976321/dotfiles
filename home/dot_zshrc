@@ -122,6 +122,9 @@ alias c='chezmoi'
 # tig
 alias t='tig'
 
+# avoid to clear history
+alias clear='printf "\e[H\e[2J"'
+
 # change the directory of current shell to chezmoi's source directory
 ccd() {
     cd "$(chezmoi source-path)" || exit
