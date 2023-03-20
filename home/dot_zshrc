@@ -112,6 +112,7 @@ alias lzd='lazydocker'
 # kubectl
 alias kx='kubectl ctx'
 alias kt='kubetail'
+alias kar='kubectl-argo-rollouts'
 
 # poetry
 alias p='poetry'
