@@ -51,8 +51,16 @@ bind main F !git commit --fixup=%(commit)
 {{- if eq .chezmoi.os "linux" }}
 {{-   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
 {{- /* WSL-specific code */}}
-bind generic c !@sh -c "echo -n %(commit) | clip.exe"
+# set key 'c' copy commit ID to clipboard:
+bind generic c @sh -c "echo -n %(commit) | clip.exe"
+
+# set key 'M' copy commit message to clipboard:
+bind generic M @sh -c "git show --no-patch --format='%s' %(commit) | clip.exe"
 {{-   else }}
-bind generic c !@sh -c "echo -n %(commit) | xclip -selection c"
+# set key 'c' copy commit ID to clipboard:
+bind generic c @sh -c "echo -n %(commit) | xclip -selection c"
+
+# set key 'M' copy commit message to clipboard:
+bind generic M @sh -c "git show --no-patch --format='%s' %(commit) | xclip -selection c"
 {{-   end }}
 {{- end }}
