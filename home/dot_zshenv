@@ -70,6 +70,7 @@ fi
 if [[ -x "$(command -v rg)" ]]; then
   export FZF_DEFAULT_COMMAND='rg --files'
   export FZF_DEFAULT_OPTS='-m'
+  export FZF_CTRL_R_OPTS='--no-sort'
 fi
 
 
