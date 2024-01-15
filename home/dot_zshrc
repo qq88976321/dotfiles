@@ -215,6 +215,21 @@ else
 fi
 
 ###############################################################
+# atuin: https://github.com/atuinsh/atuin
+###############################################################
+if [[ -x "$(command -v atuin)" ]]; then
+    source <(atuin gen-completions --shell zsh)
+
+    # eval "$(atuin init zsh --disable-up-arrow)"
+    # workaround for --disable-up-arrow not work
+    export ATUIN_NOBIND="true"
+    eval "$(atuin init zsh)"
+    bindkey '^r' _atuin_search_widget
+else
+  echo "atuin: command not found. Please check: https://github.com/atuinsh/atuin"
+fi
+
+###############################################################
 # Fix slowness of pastes with zsh-syntax-highlighting.zsh
 # Ref: https://gist.github.com/magicdude4eva/2d4748f8ef3e6bf7b1591964c201c1ab
 ###############################################################
@@ -224,7 +239,7 @@ pasteinit() {
 }
 
 pastefinish() {
-  zle -N self-insert $OLD_SELF_INSERT
+  zle -N self-insert "$OLD_SELF_INSERT"
 }
 zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
