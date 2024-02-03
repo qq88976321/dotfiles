@@ -12,7 +12,7 @@ set -x
 if [[ ! -x $(command -v go) ]]; then
     LATEST_VERSION=$(curl "https://go.dev/VERSION?m=text")
     DOWNLOAD_LINK="https://dl.google.com/go/$LATEST_VERSION.linux-amd64.tar.gz"
-    rm -rf /usr/local/go && wget -O- "$DOWNLOAD_LINK" | sudo tar -C /usr/local -xzf -
+    sudo rm -rf /usr/local/go && wget -O- "$DOWNLOAD_LINK" | sudo tar -C /usr/local -xzf -
 else
     echo "[INFO] go is already installed."
 fi
