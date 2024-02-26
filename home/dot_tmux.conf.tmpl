@@ -60,7 +60,11 @@ set -g @plugin 'tmux-plugins/tmux-sensible'
 
 # powerline theme
 set -g @plugin 'wfxr/tmux-power'
+{{- if eq .chezmoi.hostname "11301-DT-021" }}
+set -g @tmux_power_theme 'gold'
+{{- else}}
 set -g @tmux_power_theme 'sky'
+{{- end }}
 
 # highlights when tmux prefix key is pressed
 set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
