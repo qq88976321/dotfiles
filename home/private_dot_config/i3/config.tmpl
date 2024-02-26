@@ -280,9 +280,9 @@ assign [class="Google-chrome"] $ws3
 assign [class="Joplin"] $ws9
 
 # Start applications when i3 starts
-exec --no-startup-id i3-msg $(which alacritty)'
-exec --no-startup-id i3-msg $(which code)'
-exec --no-startup-id i3-msg $(which google-chrome-stable) --password-store=gnome'
-exec --no-startup-id i3-msg ~/.joplin/Joplin.AppImage'
+exec --no-startup-id alacritty
+exec --no-startup-id code
+exec --no-startup-id google-chrome-stable --password-store=gnome
+exec --no-startup-id ~/.joplin/Joplin.AppImage
 
 {{- end }}
