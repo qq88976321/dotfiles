@@ -2,7 +2,7 @@
 
 #!/usr/bin/env bash
 
-MENU="$(rofi -sep "|" -dmenu -i -p 'System' -width 15 -hide-scrollbar -lines 6 <<< " Lock| Logout| Reboot| Suspend| Shutdown")"
+MENU="$(rofi -sep "|" -dmenu -i -p 'System' -hide-scrollbar -l 6 <<< " Lock| Logout| Reboot| Suspend| Shutdown")"
 case "$MENU" in
     *Lock) i3lock-fancy;;
     *Logout) i3-msg exit;;
