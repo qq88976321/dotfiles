@@ -236,6 +236,9 @@ focus_on_window_activation focus
 # Start polybar (replace i3bar)
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
+# start picom
+exec_always --no-startup-id picom -b
+
 # assign workspace to specific monitor
 {{- if eq .chezmoi.hostname "11301-DT-021" }}
 set $monitor_left "HDMI-2"
