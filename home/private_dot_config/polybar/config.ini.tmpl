@@ -163,13 +163,14 @@ label-connected-padding = 1
 format-disconnected-prefix = 
 
 
+{{/* FIXME: nickname */}}
 [module/pulseaudio-control-output]
 ; https://github.com/marioortizmanero/polybar-pulseaudio-control
 type = custom/script
 tail = true
 label-foreground = ${colors.primary}
 
-exec = pulseaudio-control --icons-volume "奄 ,奔 , " --icon-muted "ﱝ " --node-nicknames-from "device.description" --format '${VOL_ICON} ${VOL_LEVEL}% ${NODE_NICKNAME}' listen
+exec = pulseaudio-control --icons-volume "奄 ,奔 , " --icon-muted "ﱝ " --node-nicknames-from "device.description" --format '${VOL_ICON} ${VOL_LEVEL}%' listen
 click-right = exec pavucontrol &
 click-left = pulseaudio-control togmute
 click-middle = pulseaudio-control next-node
@@ -182,7 +183,7 @@ type = custom/script
 tail = true
 label-foreground = ${colors.primary}
 
-exec = pulseaudio-control  --node-type input --icons-volume "" --icon-muted "" --node-blacklist "*.monitor" --node-nicknames-from "device.description" --format '${VOL_ICON} ${VOL_LEVEL}% ${NODE_NICKNAME}' listen
+exec = pulseaudio-control  --node-type input --icons-volume "" --icon-muted "" --node-blacklist "*.monitor" --node-nicknames-from "device.description" --format '${VOL_ICON} ${VOL_LEVEL}%' listen
 click-right = exec pavucontrol &
 click-left = pulseaudio-control --node-type input togmute
 click-middle = pulseaudio-control --node-type input next-node
