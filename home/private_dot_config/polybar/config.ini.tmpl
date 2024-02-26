@@ -54,7 +54,7 @@ height = 24pt
 separator = |
 separator-foreground = ${colors.disabled}
 modules-center = dunst date
-modules-right = pulseaudio-control-input pulseaudio-control-output tray
+modules-right = backlight pulseaudio-control-input pulseaudio-control-output tray
 
 [bar/bottom]
 inherit = bar/base
@@ -207,6 +207,13 @@ format-foreground = ${colors.primary}
 
 hook-0 = echo "%{A1:dunstctl set-paused true && polybar-msg hook dunst 2:}%{A}" &
 hook-1 = echo "%{A1:dunstctl set-paused false && polybar-msg hook dunst 1:}%{A}" &
+
+[module/backlight]
+type = internal/backlight
+
+enable-scroll = true
+format = <label>
+label =  %percentage%%
 
 [module/tray]
 type = internal/tray
