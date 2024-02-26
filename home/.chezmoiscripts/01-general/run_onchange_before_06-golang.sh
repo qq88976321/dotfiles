@@ -10,7 +10,7 @@ set -o pipefail
 set -x
 
 if [[ ! -x $(command -v go) ]]; then
-    LATEST_VERSION=$(curl "https://go.dev/VERSION?m=text")
+    LATEST_VERSION=$(curl -s "https://go.dev/VERSION?m=text" | head -n 1)
     DOWNLOAD_LINK="https://dl.google.com/go/$LATEST_VERSION.linux-amd64.tar.gz"
     sudo rm -rf /usr/local/go && wget -O- "$DOWNLOAD_LINK" | sudo tar -C /usr/local -xzf -
 else
