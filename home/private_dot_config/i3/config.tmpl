@@ -236,16 +236,28 @@ focus_on_window_activation focus
 # Start polybar (replace i3bar)
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
+###############################################################
+# Application setup
+###############################################################
+
 # Fix chrome password manager
 # Also need to edit /usr/share/applications/google-chrome.desktop and append --password-store=gnome to Exec
 # https://www.reddit.com/r/i3wm/comments/81i9tl/comment/dv5lybs/
 exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
 
-# Start applications on specific workspaces when i3 starts
-exec --no-startup-id i3-msg 'workspace $ws1; exec $(which gnome-terminal)'
-exec --no-startup-id i3-msg 'workspace $ws2; exec $(which code)'
-exec --no-startup-id i3-msg 'workspace $ws3; exec $(which google-chrome-stable) --password-store=gnome'
-exec --no-startup-id i3-msg 'workspace $ws9; exec ~/.joplin/Joplin.AppImage'
+# NOTE: use the following command to get the class name
+#   xprop | grep WM_CLASS | awk '{ print $4 }'
+#
+# Assign applications to specific workspace
+assign [class="Alacritty"] $ws1
+assign [class="Code"] $ws2
+assign [class="Google-chrome"] $ws3
+assign [class="Joplin"] $ws9
 
+# Start applications when i3 starts
+exec --no-startup-id i3-msg $(which alacritty)'
+exec --no-startup-id i3-msg $(which code)'
+exec --no-startup-id i3-msg $(which google-chrome-stable) --password-store=gnome'
+exec --no-startup-id i3-msg ~/.joplin/Joplin.AppImage'
 
 {{- end }}
