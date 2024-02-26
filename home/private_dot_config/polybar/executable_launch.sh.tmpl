@@ -10,7 +10,7 @@ polybar-msg cmd quit
 
 # Launch top bar and bottom bar on multiple monitors
 for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-    echo "---" | tee -a /tmp/polybar_top_monitor_"$m".1og /tmp/polybar_bottom_monitor_"$m".log
+    echo "---" | tee -a /tmp/polybar_top_monitor_"$m".log /tmp/polybar_bottom_monitor_"$m".log
     MONITOR=$m polybar top 2>&1 | tee -a /tmp/polybar_top_monitor_"$m".log & disown
     MONITOR=$m polybar bottom 2>&1 | tee -a /tmp/polybar_bottom_monitor_"$m".log & disown
     echo "Bars launched..."
