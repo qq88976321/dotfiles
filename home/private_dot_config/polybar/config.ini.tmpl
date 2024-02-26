@@ -53,7 +53,7 @@ inherit = bar/base
 height = 24pt
 separator = |
 separator-foreground = ${colors.disabled}
-modules-center = date
+modules-center = dunst date
 modules-right = pulseaudio-control-input pulseaudio-control-output
 tray-position = right
 tray-padding = 10
@@ -200,4 +200,12 @@ label = %output%
 label-foreground = ${colors.primary}
 label-padding-right = 1
 
+
+[module/dunst]
+type = custom/ipc
+initial = 1
+format-foreground = ${colors.primary}
+
+hook-0 = echo "%{A1:dunstctl set-paused true && polybar-msg hook dunst 2:}%{A}" &
+hook-1 = echo "%{A1:dunstctl set-paused false && polybar-msg hook dunst 1:}%{A}" &
 {{- end }}
