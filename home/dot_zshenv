@@ -47,6 +47,11 @@ export PATH="$PATH:$(go env GOPATH)/bin"
 
 
 ###############################################################
+# rust
+###############################################################
+export PATH="$HOME/.cargo/bin:$PATH"
+
+###############################################################
 # kubenetes
 ###############################################################
 # krew - plugin manager for kubectl command-line tool
@@ -72,5 +77,3 @@ if [[ -x "$(command -v rg)" ]]; then
   export FZF_DEFAULT_OPTS='-m'
   export FZF_CTRL_R_OPTS='--no-sort'
 fi
-
-
