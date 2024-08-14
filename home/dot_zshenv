@@ -77,3 +77,11 @@ if [[ -x "$(command -v rg)" ]]; then
   export FZF_DEFAULT_OPTS='-m'
   export FZF_CTRL_R_OPTS='--no-sort'
 fi
+
+###############################################################
+# node
+###############################################################
+export NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
+
+# https://github.com/nodejs/corepack#environment-variables
+export COREPACK_ENABLE_AUTO_PIN=0
