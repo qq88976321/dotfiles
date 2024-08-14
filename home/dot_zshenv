@@ -85,3 +85,10 @@ export NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
 
 # https://github.com/nodejs/corepack#environment-variables
 export COREPACK_ENABLE_AUTO_PIN=0
+
+
+###############################################################
+# nvs
+###############################################################
+export PATH="$PATH:/home/ytchang/.local/bin"
+export NVS_HOME="$HOME/.nvs"
