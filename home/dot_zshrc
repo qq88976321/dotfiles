@@ -74,7 +74,6 @@ HIST_STAMPS="yyyy-mm-dd"
 plugins=(
   autojump
   autoswitch_virtualenv
-  code-connect
   cp
   docker
   docker-compose
@@ -87,7 +86,6 @@ plugins=(
   poetry
   pyenv
   tmux
-  vscode-for-tig
   zsh-syntax-highlighting
   zsh-autosuggestions
 )

@@ -13,6 +13,8 @@ export LC_ALL=en_US.UTF-8
 # GPG TTY support
 export GPG_TTY=$(tty)
 
+export TIG_EDITOR=code-for-tig
+
 ulimit -S -c 0  # core dumpsize
 umask 022
 
