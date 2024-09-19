@@ -83,7 +83,6 @@ plugins=(
   helm
   kubectl
   kubetail
-  poetry
   pyenv
   tmux
   zsh-syntax-highlighting
@@ -112,9 +111,6 @@ alias lzd='lazydocker'
 alias kx='kubectl ctx'
 alias kt='kubetail'
 alias kar='kubectl-argo-rollouts'
-
-# poetry
-alias p='poetry'
 
 # chezmoi
 alias c='chezmoi'
