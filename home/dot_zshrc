@@ -177,19 +177,12 @@ else
 fi
 
 ###############################################################
-# nvm
+# fnm
 ###############################################################
-if [[ -s "$NVM_DIR/nvm.sh" ]] && [[ -s "$NVM_DIR/bash_completion" ]]; then
-  source "$NVM_DIR/nvm.sh"  # This loads nvm
-  source "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-else
-  echo "nvm: init script not found. Please check: https://github.com/nvm-sh/nvm#installing-and-updating"
+if [[ -x "$(command -v fnm)" ]]; then
+  eval "$(fnm env --use-on-cd --shell zsh)"
+  source <(fnm completions --shell zsh)
 fi
-
-###############################################################
-# nvs
-###############################################################
-[ -s "$NVS_HOME/nvs.sh" ] && . "$NVS_HOME/nvs.sh"
 
 ###############################################################
 # pyenv

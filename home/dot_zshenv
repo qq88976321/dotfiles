@@ -26,13 +26,6 @@ export PATH="$HOME/.local/bin:$PATH"
 ###############################################################
 export ZSH="$HOME/.oh-my-zsh"
 
-
-###############################################################
-# nvm
-###############################################################
-export NVM_DIR="$([[ -z "${XDG_CONFIG_HOME-}" ]] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-
-
 ###############################################################
 # pyenv
 ###############################################################
@@ -87,10 +80,3 @@ export NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
 
 # https://github.com/nodejs/corepack#environment-variables
 export COREPACK_ENABLE_AUTO_PIN=0
-
-
-###############################################################
-# nvs
-###############################################################
-export PATH="$PATH:/home/ytchang/.local/bin"
-export NVS_HOME="$HOME/.nvs"
