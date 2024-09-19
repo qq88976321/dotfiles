@@ -199,6 +199,15 @@ else
 fi
 
 ###############################################################
+# uv
+###############################################################
+if [[ -x "$(command -v uv)" ]]; then
+  source <(uv generate-shell-completion zsh)
+else
+  echo "uv: command not found. Please check: https://github.com/astral-sh/uv?tab=readme-ov-file#installation"
+fi
+
+###############################################################
 # thefuck
 ###############################################################
 if [[ -x "$(command -v thefuck)" ]]; then
