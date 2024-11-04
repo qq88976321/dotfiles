@@ -118,9 +118,6 @@ alias c='chezmoi'
 # tig
 alias t='tig'
 
-# bat
-alias cat='bat --paging=never'
-
 # avoid to clear history
 alias clear='printf "\e[H\e[2J"'
 
