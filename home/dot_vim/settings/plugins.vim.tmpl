@@ -23,7 +23,8 @@ let g:indentLine_char = '|'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " fatih/vim-go
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:go_fmt_command = "goimports"
+let g:go_fmt_command="gopls"
+let g:go_gopls_gofumpt=1
 {{- if .private_git_repo }}
 let g:go_fmt_options = "-local={{ .private_git_repo }}"
 {{- end }}
