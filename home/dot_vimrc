@@ -11,6 +11,7 @@ call plug#begin('~/.vim/plugged')
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Language - Plugins or syntax highlighting for a language or library
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'prabirshrestha/vim-lsp'
 Plug 'dense-analysis/ale'
 Plug 'Yggdroot/indentLine'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }

@@ -1,12 +1,8 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " dense-analysis/ale
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let b:ale_linters = {
-\    'python': ['flake8'],
-\}
-let b:ale_fixers = {
-\    'python': ['black', 'isort'],
-\}
+let g:ale_linters = { "python": ["ruff"] }
+let g:ale_fixers = { "python": ["ruff", "ruff_format"] }
 let b:ale_fix_on_save = 1
 
 
@@ -122,3 +118,16 @@ nmap <C-S-F> :Ag<CR>
 " takac/vim-hardtime
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:hardtime_default_on = 0
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" prabirshrestha/vim-lsp
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if executable('ruff')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'ruff',
+        \ 'cmd': {server_info->['ruff', 'server']},
+        \ 'allowlist': ['python'],
+        \ 'workspace_config': {},
+        \ })
+endif
