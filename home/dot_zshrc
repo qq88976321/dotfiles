@@ -5,6 +5,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+[[ -f ~/.p10k.mise.zsh ]] && source ~/.p10k.mise.zsh
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -73,7 +75,6 @@ HIST_STAMPS="yyyy-mm-dd"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   autojump
-  autoswitch_virtualenv
   cp
   docker
   docker-compose
@@ -83,7 +84,6 @@ plugins=(
   helm
   kubectl
   kubetail
-  pyenv
   tmux
   zsh-syntax-highlighting
   zsh-autosuggestions
@@ -180,21 +180,12 @@ else
 fi
 
 ###############################################################
-# fnm
+# mise
 ###############################################################
-if [[ -x "$(command -v fnm)" ]]; then
-  eval "$(fnm env --use-on-cd --shell zsh)"
-  source <(fnm completions --shell zsh)
-fi
-
-###############################################################
-# pyenv
-###############################################################
-if [[ -d "$HOME/.pyenv" ]]; then
-  eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
+if [[ -x "$(command -v mise)" ]]; then
+  eval "$(mise activate zsh)"
 else
-  echo "pyenv: command not found. Please check: https://github.com/pyenv/pyenv#installation"
+  echo "mise: command not found. Please check: https://mise.jdx.dev/getting-started.html#installing-mise-cli"
 fi
 
 ###############################################################
@@ -265,4 +256,3 @@ pastefinish() {
 }
 zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
-
