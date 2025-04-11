@@ -171,6 +171,15 @@ else
 fi
 
 ###############################################################
+# zoxide
+###############################################################
+if [[ -x "$(command -v zoxide)" ]]; then
+  eval "$(zoxide init zsh)"
+else
+  echo "zoxide: command not found. Please check: https://github.com/ajeetdsouza/zoxide#installation"
+fi
+
+###############################################################
 # fnm
 ###############################################################
 if [[ -x "$(command -v fnm)" ]]; then
