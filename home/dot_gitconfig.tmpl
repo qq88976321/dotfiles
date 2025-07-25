@@ -38,6 +38,7 @@
 	trustExitCode = true
 [diff]
 	tool = vimdiff
+	algorithm = histogram
 [diff "sopsdiffer"]
 	textconv = sops -d
 [sequence]
@@ -56,3 +57,7 @@
 {{- end }}
 [commit]
 	gpgsign = true
+	verbose = true
+[rerere]
+	enabled = true
+	autoupdate = true
