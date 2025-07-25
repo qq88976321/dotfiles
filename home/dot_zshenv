@@ -1,4 +1,12 @@
 ###############################################################
+# local settings
+###############################################################
+local_zshenv_file="$HOME/.zshenv.local"
+if [[ -f "$local_zshenv_file" ]]; then
+  source "$local_zshenv_file"
+fi
+
+###############################################################
 # common settings
 ###############################################################
 # Keep only the first occurrence of each duplicated value
