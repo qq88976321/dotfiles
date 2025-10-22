@@ -87,7 +87,6 @@ plugins=(
   tmux
   zsh-syntax-highlighting
   zsh-autosuggestions
-  zsh-github-copilot
 )
 
 source "$ZSH"/oh-my-zsh.sh
@@ -230,17 +229,6 @@ if [[ -x "$(command -v atuin)" ]]; then
 else
   echo "atuin: command not found. Please check: https://github.com/atuinsh/atuin"
 fi
-
-###############################################################
-# github copilot: https://github.com/loiccoyle/zsh-github-copilot
-###############################################################
-if [[ -x "$(command -v gh)" ]]; then
-    eval "$(gh copilot alias -- zsh)"
-
-    bindkey '^[|' zsh_gh_copilot_explain  # bind Alt+shift+\ to explain
-    bindkey '^[\' zsh_gh_copilot_suggest  # bind Alt+\ to suggest
-fi
-
 
 ###############################################################
 # Fix slowness of pastes with zsh-syntax-highlighting.zsh
