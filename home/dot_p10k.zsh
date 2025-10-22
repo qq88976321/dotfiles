@@ -1190,6 +1190,7 @@
   #   typeset -g POWERLEVEL9K_KUBECONTEXT_TEST_CONTENT_EXPANSION='> ${P9K_CONTENT} <'
   typeset -g POWERLEVEL9K_KUBECONTEXT_CLASSES=(
       '*staging*' STAGING
+      '*prod*'      PROD
       '*az*'      PROD
       '*'         DEFAULT)
 
