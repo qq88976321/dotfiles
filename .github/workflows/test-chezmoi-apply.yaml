@@ -29,7 +29,6 @@ jobs:
 
           name = "github-action"
           email = "github-action@gmail.com"
-          signingkey = ""
           private_git_repo = ""
           EOF
       - name: Install dotfiles using chezmoi

@@ -2,7 +2,7 @@
 [user]
 	name = {{ .name }}
 	email = {{ .email }}
-	signingkey = {{ .signingkey }}
+	signingkey = ~/.ssh/id_ed25519.pub
 [core]
 	filemode = true
 	editor = vim
@@ -61,3 +61,7 @@
 [rerere]
 	enabled = true
 	autoupdate = true
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = ~/.ssh/allowed_signers

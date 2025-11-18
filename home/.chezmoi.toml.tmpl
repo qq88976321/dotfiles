@@ -2,7 +2,6 @@
 
 {{- $name := promptStringOnce . "name" "[Git] Username" -}}
 {{- $email := promptStringOnce . "email" "[Git] Email address" -}}
-{{- $signingkey := promptStringOnce . "signingkey" "[Git] GnuPG signature key" -}}
 {{- $private_git_repo := promptStringOnce . "private_git_repo" "[Git] Private git repository" -}}
 
 [data]
@@ -10,5 +9,4 @@ is_desktop_env = {{ $is_desktop_env }}
 
 name = {{ $name | quote }}
 email = {{ $email | quote }}
-signingkey = {{ $signingkey | quote }}
 private_git_repo = {{ $private_git_repo | quote }}
