@@ -1,0 +1,24 @@
+[tools]
+age = "latest"
+atuin = "latest"
+chezmoi = "2.45"
+fd = "latest"
+fzf = "latest"
+go = "1.23"
+k9s = "latest"
+node = "22"
+python = "3.14"
+rg = "latest"
+tmux = "latest"
+usage = "latest"
+zellij = "latest"
+
+[settings]
+idiomatic_version_file_enable_tools = ["python"]
+# python.uv_venv_auto = true
+# experimental = true
+
+[env]
+# _.python.venv = { path = "{{env.PWD}}/.venv" }
+# _.python.venv = { path = "{{env.PWD}}/.venv", create = false, uv_create_args = ['--seed'] }
+
