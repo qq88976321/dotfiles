@@ -1,16 +1,16 @@
 # Dotfiles <!-- omit in toc -->
 
 ![test-chezmoi-apply](https://github.com/qq88976321/dotfiles/actions/workflows/test-chezmoi-apply.yaml/badge.svg)
-![ubuntu-20.04](https://img.shields.io/badge/ubuntu-20.04-blue)
-![ubuntu-22.04](https://img.shields.io/badge/ubuntu-22.04-blue)
 
-My linux dotfiles and daily used tools, managed with [chezmoi](https://www.chezmoi.io). Mainly used on Ubuntu 20.04 Desktop / Server and seldomly used on Ubuntu 20.04 / 22.04 WSL. (The installation scripts for some tools are currently not supported on Ubuntu 18.04.)
+My linux dotfiles and daily used tools, managed with [chezmoi](https://www.chezmoi.io). Mainly used on Arch Linux and Ubuntu.
 
 ## Table of Contents <!-- omit in toc -->
 
 - [Preface](#preface)
-- [Installation](#installation)
-- [Font](#font)
+- [Prerequisites](#prerequisites)
+    - [Tools](#tools)
+    - [Font](#font)
+- [How to Use](#how-to-use)
 - [Key Bindings](#key-bindings)
     - [i3](#i3)
     - [tmux](#tmux)
@@ -27,13 +27,40 @@ My linux dotfiles and daily used tools, managed with [chezmoi](https://www.chezm
 
 ## Preface
 
-i3, polybar, gnome terminal, tmux, zsh and vim
+- **Window Manager**: i3-wm with polybar
+- **Terminal**: alacritty with tmux
+- **Shell**: zsh with powerlevel10k
+- **Editor**: mainly vscode (which is not included in the dotfiles), but also vim for quick edit in terminal
 
 ![screenshot](images/preface.png)
 
-## Installation
+## Prerequisites
 
-**NOTE**: These dotfiles and tools are customized according to personal preferences and development needs. Therefore, you are advised to review the code and remove what you don't want or need (especially the scripts in the `.chezmoiscripts` folder).
+These dotfiles and softwares are customized according to personal preferences and development needs. You may need to adjust them to fit your own workflow.
+
+### Tools
+
+The installation ways of these tools may vary depending on your Linux distribution. Please refer to their official documentations for more details.
+
+- [i3](https://github.com/i3/i3)
+- [i3lock-fancy](https://github.com/meskarune/i3lock-fancy)
+- [polybar](https://github.com/polybar/polybar)
+- [rofi](https://github.com/davatorium/rofi)
+- [dunst](https://github.com/dunst-project/dunst)
+- [alacritty](https://github.com/alacritty/alacritty)
+- [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
+- [tmux](https://github.com/tmux/tmux)
+- [mise](https://github.com/jdx/mise)
+- [powerlevel10k](https://github.com/romkatv/powerlevel10k)
+- [tig](https://github.com/jonas/tig)
+- [diff-highlight](https://github.com/git/git/tree/master/contrib/diff-highlight)
+- [git-interactive-rebase-tool](https://github.com/MitMaro/git-interactive-rebase-tool)
+
+### Font
+
+Please take a look at [Meslo Nerd Font patched for Powerlevel10k](https://github.com/romkatv/powerlevel10k/blob/master/font.md).
+
+## How to Use
 
 Install the `chezmoi` command and dotfiles from this GitHub dotfile repo on a new machine with this command:
 
@@ -52,39 +79,35 @@ $ sh -c "$(wget -qO- https://chezmoi.io/get)" -- init --apply qq88976321
 # [Git] Private git repository?
 ```
 
-## Font
-
-Please take a look at [Meslo Nerd Font patched for Powerlevel10k](https://github.com/romkatv/powerlevel10k/blob/master/font.md).
-
 ## Key Bindings
 
 Here are my daily used key bindings, which may not include all the key bindings supported by these tools.
 
 ### [i3](https://github.com/i3/i3)
 
-| key                                     | description                                  |
-| --------------------------------------- | -------------------------------------------- |
-| `win` (Mod4)                            | modifier                                     |
-| $mod+`enter`                            | open terminal                                |
-| $mod+`shift`+`q`                        | close focused window                         |
-| $mod+`d`                                | open rofi                                    |
-| $mod+`h` / $mod+`Left`                  | focus left                                   |
-| $mod+`j` / $mod+`Down`                  | focus down                                   |
-| $mod+`k` / $mod+`Up`                    | focus up                                     |
-| $mod+`l` / $mod+`Right`                 | focus right                                  |
-| $mod+`shift`+`h` / $mod+`shift`+`Left`  | move focused window left                     |
-| $mod+`shift`+`j` / $mod+`shift`+`Down`  | move focused window down                     |
-| $mod+`shift`+`k` / $mod+`shift`+`Up`    | move focused window up                       |
-| $mod+`shift`+`l` / $mod+`shift`+`Right` | move focused window right                    |
-| $mod+`shift`+`space`                    | toggle tiling / floating                     |
-| $mod+<0 to 9>                           | switch to workspace <0 to 9>                 |
-| $mod+`shift`+<0 to 9>                   | move focused container to workspace <0 to 9> |
-| $mod+`shift`+`c`                        | reload the configuration file                |
-| $mod+`shift`+`r`                        | restart i3 inplace                           |
-| $mod+`shift`+`e`                        | exit i3                                      |
-| `Scroll Lock`                           | lock screen using i3lock-fancy               |
-| $mod+`r`                                | enter resize mode                            |
-| $mod+`mouse right click`                | resize window                                |
+| key                                     | description                                                                 |
+| --------------------------------------- | --------------------------------------------------------------------------- |
+| `win` (Mod4)                            | modifier                                                                    |
+| $mod+`enter`                            | open terminal                                                               |
+| $mod+`shift`+`q`                        | close focused window                                                        |
+| $mod+`d`                                | open rofi                                                                   |
+| $mod+`h` / $mod+`Left`                  | focus left                                                                  |
+| $mod+`j` / $mod+`Down`                  | focus down                                                                  |
+| $mod+`k` / $mod+`Up`                    | focus up                                                                    |
+| $mod+`l` / $mod+`Right`                 | focus right                                                                 |
+| $mod+`shift`+`h` / $mod+`shift`+`Left`  | move focused window left                                                    |
+| $mod+`shift`+`j` / $mod+`shift`+`Down`  | move focused window down                                                    |
+| $mod+`shift`+`k` / $mod+`shift`+`Up`    | move focused window up                                                      |
+| $mod+`shift`+`l` / $mod+`shift`+`Right` | move focused window right                                                   |
+| $mod+`shift`+`space`                    | toggle tiling / floating                                                    |
+| $mod+<0 to 9>                           | switch to workspace <0 to 9>                                                |
+| $mod+`shift`+<0 to 9>                   | move focused container to workspace <0 to 9>                                |
+| $mod+`shift`+`c`                        | reload the configuration file                                               |
+| $mod+`shift`+`r`                        | restart i3 inplace                                                          |
+| $mod+`shift`+`e`                        | exit i3                                                                     |
+| `Scroll Lock`                           | lock screen using [i3lock-fancy](https://github.com/meskarune/i3lock-fancy) |
+| $mod+`r`                                | enter resize mode                                                           |
+| $mod+`mouse right click`                | resize window                                                               |
 
 ### [tmux](https://github.com/tmux/tmux)
 
@@ -93,7 +116,7 @@ First press the prefix key `ctrl`+`space`, released and then press the key liste
 | key       | description                 |
 | --------- | --------------------------- |
 | `?`       | list all key bindings       |
-| `         | `                           | split window horizontally |
+| `         | split window horizontally   |
 | `-`       | split window vertically     |
 | `<arrow>` | select pane                 |
 | `p`       | previous window             |
@@ -136,11 +159,11 @@ First press the prefix key `ctrl`+`space`, released and then press the key liste
 
 #### [tmux-open](https://github.com/tmux-plugins/tmux-open)
 
-| key         | description                                                                                         |
-| ----------- | --------------------------------------------------------------------------------------------------- |
+| key         | description                                                                                       |
+| ----------- | ------------------------------------------------------------------------------------------------- |
 | `o`         | open a highlighted selection with the system default program. open for OS X or xdg-open for Linux |
-| `ctrl`-`o`  | open a highlighted selection with the $EDITOR                                                       |
-| `shift`-`s` | search the highlighted selection directly using google                                              |
+| `ctrl`-`o`  | open a highlighted selection with the $EDITOR                                                     |
+| `shift`-`s` | search the highlighted selection directly using google                                            |
 
 #### [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm)
 
