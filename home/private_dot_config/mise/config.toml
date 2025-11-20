@@ -12,6 +12,7 @@ rg = "latest"
 tmux = "latest"
 usage = "latest"
 zellij = "latest"
+zoxide = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["python"]

@@ -161,10 +161,20 @@ else
 fi
 
 ###############################################################
+# mise
+###############################################################
+if [[ -x "$(command -v mise)" ]]; then
+  eval "$(mise activate zsh)"
+else
+  echo "mise: command not found. Please check: https://mise.jdx.dev/getting-started.html#installing-mise-cli"
+fi
+
+###############################################################
 # fuzzy finder
 ###############################################################
-if [[ -f "$HOME/.fzf.zsh" ]]; then
-  source "$HOME/.fzf.zsh"
+if [[ -x "$(command -v fzf)" ]]; then
+  # Set up fzf key bindings and fuzzy completion
+  source <(fzf --zsh)
 else
   echo "fzf: init script not found. Please check: https://github.com/junegunn/fzf#installation"
 fi
@@ -176,15 +186,6 @@ if [[ -x "$(command -v zoxide)" ]]; then
   eval "$(zoxide init zsh)"
 else
   echo "zoxide: command not found. Please check: https://github.com/ajeetdsouza/zoxide#installation"
-fi
-
-###############################################################
-# mise
-###############################################################
-if [[ -x "$(command -v mise)" ]]; then
-  eval "$(mise activate zsh)"
-else
-  echo "mise: command not found. Please check: https://mise.jdx.dev/getting-started.html#installing-mise-cli"
 fi
 
 ###############################################################
