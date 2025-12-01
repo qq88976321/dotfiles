@@ -59,3 +59,8 @@ key = "="
 mods = "Control"
 action = "None"
 
+# Shift+Return sends ESC+Enter to work in tmux
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\u001b\r"
