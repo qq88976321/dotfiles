@@ -33,10 +33,29 @@ family = "MesloLGS NF"
 
 [[keyboard.bindings]]
 action = "IncreaseFontSize"
-key = "Plus"
-mods = "Control"
+key = "="
+mods = "Alt"
 
 [[keyboard.bindings]]
 action = "DecreaseFontSize"
 key = "Minus"
+mods = "Alt"
+
+# Disable Ctrl ++
+[[keyboard.bindings]]
+key = "Plus"
 mods = "Control"
+action = "None"
+
+# Disable Ctrl -
+[[keyboard.bindings]]
+key = "Minus"
+mods = "Control"
+action = "None"
+
+# Disable Ctrl =
+[[keyboard.bindings]]
+key = "="
+mods = "Control"
+action = "None"
+
