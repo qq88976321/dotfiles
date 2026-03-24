@@ -20,10 +20,6 @@ set-option -sa terminal-overrides ",xterm*:Tc"
 # Let tmux generate xterm(1) -style function key sequences
 setw -g xterm-keys on
 
-# Pass through extended key sequences (kitty keyboard protocol) to inner apps
-set -g extended-keys always
-set -as terminal-features 'xterm-kitty:extkeys'
-
 # use vi style key bindings in copy mode
 setw -g mode-keys vi
 
