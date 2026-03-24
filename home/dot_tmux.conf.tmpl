@@ -20,6 +20,9 @@ set-option -sa terminal-overrides ",xterm*:Tc"
 # Let tmux generate xterm(1) -style function key sequences
 setw -g xterm-keys on
 
+# When running Claude Code inside tmux, notifications and the terminal progress bar only reach the outer terminal when passthrough is enabled
+set -g allow-passthrough all
+
 # use vi style key bindings in copy mode
 setw -g mode-keys vi
 
