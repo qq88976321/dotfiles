@@ -36,7 +36,7 @@ let mapleader = "\<space>"
 set clipboard=unnamed,unnamedplus
 
 " Prevent vim from clearing the clipboard on exit
-autocmd VimLeave * call system("xclip -i -selection clipboard", getreg('+'))
+autocmd VimLeave * call system("clipboard-copy", getreg('+'))
 
 set updatetime=100
 

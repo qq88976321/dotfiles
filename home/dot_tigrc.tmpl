@@ -60,9 +60,9 @@ bind generic c @sh -c "echo -n %(commit) | clip.exe"
 bind generic M @sh -c "git show --no-patch --format='%s' %(commit) | clip.exe"
 {{-   else }}
 # set key 'c' copy commit ID to clipboard:
-bind generic c @sh -c "echo -n %(commit) | xclip -selection c"
+bind generic c @sh -c "printf %s %(commit) | clipboard-copy"
 
 # set key 'M' copy commit message to clipboard:
-bind generic M @sh -c "git show --no-patch --format='%s' %(commit) | xclip -selection c"
+bind generic M @sh -c "git show --no-patch --format='%s' %(commit) | clipboard-copy"
 {{-   end }}
 {{- end }}
