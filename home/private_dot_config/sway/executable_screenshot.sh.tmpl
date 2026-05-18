@@ -1,0 +1,31 @@
+{{- if .is_desktop_env -}}
+#!/usr/bin/env bash
+set -euo pipefail
+
+mode="${1:-region}"
+screenshot_dir="${XDG_PICTURES_DIR:-$HOME/Pictures}/Screenshots"
+mkdir -p "$screenshot_dir"
+
+file="$screenshot_dir/screenshot-$(date +%Y%m%d-%H%M%S).png"
+
+case "$mode" in
+    full)
+        grim "$file"
+        ;;
+    region)
+        geometry="$(slurp)" || exit 0
+        [ -n "$geometry" ] || exit 0
+        grim -g "$geometry" "$file"
+        ;;
+    *)
+        printf '%s\n' "screenshot.sh: expected region or full" >&2
+        exit 2
+        ;;
+esac
+
+if command -v wl-copy >/dev/null 2>&1; then
+    wl-copy --type image/png < "$file"
+fi
+
+printf '%s\n' "$file"
+{{- end }}

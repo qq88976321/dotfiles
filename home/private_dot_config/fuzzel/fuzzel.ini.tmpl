@@ -1,0 +1,25 @@
+{{- if .is_desktop_env -}}
+[main]
+font=MesloLGS NF:size=14
+terminal=kitty
+width=60
+lines=10
+horizontal-pad=20
+vertical-pad=12
+inner-pad=6
+prompt=run:
+show-actions=yes
+icons-enabled=no
+
+[colors]
+background=1e1e2eff
+text=cdd6f4ff
+match=f38ba8ff
+selection=313244ff
+selection-text=cdd6f4ff
+border=89b4faff
+
+[border]
+width=1
+radius=0
+{{- end }}

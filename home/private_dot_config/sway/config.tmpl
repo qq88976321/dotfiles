@@ -154,6 +154,8 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 bindsym Scroll_Lock exec $lock
+bindsym Print exec ~/.config/sway/screenshot.sh region
+bindsym Shift+Print exec ~/.config/sway/screenshot.sh full
 
 bindsym Ctrl+Shift+space     exec makoctl dismiss
 bindsym Ctrl+Shift+BackSpace exec makoctl dismiss --all

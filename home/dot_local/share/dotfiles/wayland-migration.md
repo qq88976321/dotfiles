@@ -114,6 +114,7 @@ After logging into Sway, verify:
 2. `Mod4+d` opens fuzzel.
 3. Workspaces 1 through 10 switch and move containers as expected.
 4. `Print` captures a selected region to a file and the clipboard.
+   `Shift+Print` captures the full output.
 5. `Scroll_Lock` locks with swaylock.
 6. Idle lock and suspend behavior works through swayidle.
 7. Waybar shows workspaces, mode, date, CPU, memory, network, audio input,
