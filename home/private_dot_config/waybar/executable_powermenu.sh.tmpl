@@ -1,0 +1,31 @@
+{{- if .is_desktop_env -}}
+#!/usr/bin/env bash
+set -euo pipefail
+
+choice="$(printf 'Lock\nLogout\nReboot\nSuspend\nShutdown\n' | fuzzel --dmenu --prompt 'System: ' --lines 5)" || exit 0
+
+case "$choice" in
+    Lock)
+        swaylock -f -c 000000
+        ;;
+    Logout)
+        swaymsg exit
+        ;;
+    Reboot)
+        systemctl reboot
+        ;;
+    Suspend)
+        systemctl suspend
+        ;;
+    Shutdown)
+        systemctl -i poweroff
+        ;;
+    "")
+        exit 0
+        ;;
+    *)
+        printf '%s\n' "waybar-powermenu: unknown choice: $choice" >&2
+        exit 1
+        ;;
+esac
+{{- end }}

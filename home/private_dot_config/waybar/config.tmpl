@@ -1,0 +1,99 @@
+{{- if .is_desktop_env -}}
+[
+  {
+    "layer": "top",
+    "position": "top",
+    "height": 24,
+    "spacing": 8,
+    "modules-center": [
+      "custom/notifications",
+      "clock"
+    ],
+    "modules-right": [
+      "backlight",
+      "pulseaudio#source",
+      "pulseaudio",
+      "tray"
+    ],
+    "custom/notifications": {
+      "format": "NOTIFY",
+      "tooltip": false,
+      "on-click": "makoctl dismiss --all"
+    },
+    "clock": {
+      "interval": 1,
+      "format": "{:%Y/%m/%d(%a) %H:%M:%S}",
+      "tooltip-format": "{calendar}",
+      "on-click": "gsimplecal"
+    },
+    "backlight": {
+      "format": "BRT {percent}%",
+      "on-scroll-up": "brightnessctl -q set +3%",
+      "on-scroll-down": "brightnessctl --min-val=2 -q set 3%-"
+    },
+    "pulseaudio": {
+      "format": "VOL {volume}%",
+      "format-muted": "VOL muted",
+      "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+      "on-click-right": "pavucontrol",
+      "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+      "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+    },
+    "pulseaudio#source": {
+      "format-source": "MIC {volume}%",
+      "format-source-muted": "MIC muted",
+      "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+      "on-click-right": "pavucontrol",
+      "on-scroll-up": "pactl set-source-volume @DEFAULT_SOURCE@ +5%",
+      "on-scroll-down": "pactl set-source-volume @DEFAULT_SOURCE@ -5%"
+    },
+    "tray": {
+      "spacing": 10
+    }
+  },
+  {
+    "layer": "top",
+    "position": "bottom",
+    "height": 18,
+    "spacing": 8,
+    "modules-left": [
+      "sway/workspaces",
+      "sway/mode"
+    ],
+    "modules-right": [
+      "cpu",
+      "memory",
+      "network",
+      "custom/power"
+    ],
+    "sway/workspaces": {
+      "disable-scroll": false,
+      "all-outputs": false,
+      "format": "{name}"
+    },
+    "sway/mode": {
+      "format": "MODE {}"
+    },
+    "cpu": {
+      "interval": 5,
+      "format": "CPU {usage}%"
+    },
+    "memory": {
+      "interval": 5,
+      "format": "MEM {percentage}%"
+    },
+    "network": {
+      "interval": 5,
+      "format-wifi": "WIFI {ipaddr}",
+      "format-ethernet": "ETH {ipaddr}",
+      "format-disconnected": "NET down",
+      "tooltip-format": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "custom/power": {
+      "format": "PWR",
+      "tooltip": false,
+      "on-click": "~/.config/waybar/powermenu.sh"
+    }
+  }
+]
+{{- end }}

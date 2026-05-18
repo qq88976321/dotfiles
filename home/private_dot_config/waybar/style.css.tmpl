@@ -1,0 +1,72 @@
+{{- if .is_desktop_env -}}
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "MesloLGS NF", "Noto Color Emoji", monospace;
+    font-size: 12px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: #282a2e;
+    color: #c5c8c6;
+}
+
+window#waybar.bottom {
+    background: #000000;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    color: #c5c8c6;
+    background: transparent;
+}
+
+#workspaces button.focused,
+#workspaces button.active {
+    background: #373b41;
+    color: #f0c674;
+    box-shadow: inset 0 -2px #f0c674;
+}
+
+#workspaces button.urgent {
+    background: #a54242;
+    color: #ffffff;
+}
+
+#workspaces button.empty {
+    color: #707880;
+}
+
+#mode,
+#clock,
+#custom-notifications,
+#backlight,
+#pulseaudio,
+#pulseaudio.source,
+#tray,
+#cpu,
+#memory,
+#network,
+#custom-power {
+    padding: 0 8px;
+}
+
+#mode {
+    background: #373b41;
+    color: #f0c674;
+}
+
+#clock,
+#custom-notifications,
+#backlight,
+#pulseaudio,
+#pulseaudio.source,
+#custom-power {
+    color: #f0c674;
+}
+
+#network.disconnected {
+    color: #707880;
+}
+{{- end }}
