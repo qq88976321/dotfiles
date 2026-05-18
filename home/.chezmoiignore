@@ -3,9 +3,14 @@
 
 {{ if eq .is_desktop_env false }}
 .config/dunst
+.config/fuzzel
 .config/i3
 .config/gtk-3.0
+.config/kanshi
+.config/mako
 .config/polybar
 .config/pulse
 .config/rofi
+.config/sway
+.config/waybar
 {{ end }}

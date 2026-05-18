@@ -1,0 +1,13 @@
+{{- if .is_desktop_env -}}
+# Use `swaymsg -t get_outputs` to confirm connector names on each host.
+{{- if eq .chezmoi.hostname "2700x-linux" }}
+profile 2700x-linux {
+    output DP-1 mode 2560x1440@120Hz position 0,0
+}
+{{- else if eq .chezmoi.hostname "11301-DT-021" }}
+profile 11301-DT-021 {
+    output HDMI-A-2 position 0,0
+    output HDMI-A-3 position 2560,0
+}
+{{- end }}
+{{- end }}
