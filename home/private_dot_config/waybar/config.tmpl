@@ -16,7 +16,7 @@
       "tray"
     ],
     "custom/notifications": {
-      "format": "NOTIFY",
+      "format": "",
       "tooltip": false,
       "on-click": "makoctl dismiss --all"
     },
@@ -27,20 +27,21 @@
       "on-click": "gsimplecal"
     },
     "backlight": {
-      "format": "BRT {percent}%",
+      "format": "🔅 {percent}%",
       "on-scroll-up": "brightnessctl -q set +3%",
       "on-scroll-down": "brightnessctl --min-val=2 -q set 3%-"
     },
     "wireplumber": {
-      "format": "VOL {volume}%",
-      "format-muted": "VOL muted",
+      "format": "{icon} {volume}%",
+      "format-muted": "ﱝ muted",
+      "format-icons": ["奄", "奔", ""],
       "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
       "on-click-right": "pavucontrol",
       "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
       "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
     },
     "custom/mic": {
-      "exec": "wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | awk '/MUTED/{print \"MIC muted\"; exit} {printf \"MIC %d%%\\n\", $2*100}'",
+      "exec": "wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | awk '/MUTED/{print \" muted\"; exit} {printf \" %d%%\\n\", $2*100}'",
       "interval": 2,
       "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
       "on-click-right": "pavucontrol",
@@ -72,25 +73,25 @@
       "format": "{name}"
     },
     "sway/mode": {
-      "format": "MODE {}"
+      "format": "{}"
     },
     "cpu": {
       "interval": 5,
-      "format": "CPU {usage}%"
+      "format": "<span foreground='#f0c674'></span> {usage}%"
     },
     "memory": {
       "interval": 5,
-      "format": "MEM {percentage}%"
+      "format": "<span foreground='#f0c674'></span> {percentage}%"
     },
     "network": {
       "interval": 5,
-      "format-wifi": "WIFI {ipaddr}",
-      "format-ethernet": "ETH {ipaddr}",
-      "format-disconnected": "NET down",
+      "format-wifi": "<span foreground='#f0c674'></span> {ipaddr}",
+      "format-ethernet": " {ipaddr}",
+      "format-disconnected": "睊",
       "tooltip-format": "{ifname}: {ipaddr}/{cidr}"
     },
     "custom/power": {
-      "format": "PWR",
+      "format": "",
       "tooltip": false,
       "on-click": "~/.config/waybar/powermenu.sh"
     }
