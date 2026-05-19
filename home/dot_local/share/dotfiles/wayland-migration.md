@@ -75,6 +75,10 @@ The Sway path uses Wayland-native tools:
 - `grim`, `slurp`, and `wl-copy` replace `flameshot gui`.
 - `swaymsg -t get_tree` replaces `xprop` for window matching.
 - `swaymsg exit` replaces `i3-msg exit`.
+- `wpctl` (from wireplumber) replaces `pactl` for volume and mute key bindings,
+  and waybar uses its native `wireplumber` module for the sink plus a
+  `custom/mic` module driven by `wpctl` for the source. `pavucontrol` still
+  works against the `pipewire-pulse` shim if needed.
 
 Caps Lock remapping is intentionally not ported to Wayland in this migration.
 No `setxkbmap`, `xcape`, `keyd`, or replacement daemon is added for Sway.

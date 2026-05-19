@@ -11,8 +11,8 @@
     ],
     "modules-right": [
       "backlight",
-      "pulseaudio#source",
-      "pulseaudio",
+      "custom/mic",
+      "wireplumber",
       "tray"
     ],
     "custom/notifications": {
@@ -31,21 +31,21 @@
       "on-scroll-up": "brightnessctl -q set +3%",
       "on-scroll-down": "brightnessctl --min-val=2 -q set 3%-"
     },
-    "pulseaudio": {
+    "wireplumber": {
       "format": "VOL {volume}%",
       "format-muted": "VOL muted",
-      "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+      "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
       "on-click-right": "pavucontrol",
-      "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
-      "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+      "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
+      "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
     },
-    "pulseaudio#source": {
-      "format-source": "MIC {volume}%",
-      "format-source-muted": "MIC muted",
-      "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+    "custom/mic": {
+      "exec": "wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | awk '/MUTED/{print \"MIC muted\"; exit} {printf \"MIC %d%%\\n\", $2*100}'",
+      "interval": 2,
+      "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
       "on-click-right": "pavucontrol",
-      "on-scroll-up": "pactl set-source-volume @DEFAULT_SOURCE@ +5%",
-      "on-scroll-down": "pactl set-source-volume @DEFAULT_SOURCE@ -5%"
+      "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+",
+      "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-"
     },
     "tray": {
       "spacing": 10
