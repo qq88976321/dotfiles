@@ -198,12 +198,12 @@ else
 fi
 
 ###############################################################
-# thefuck
+# pay-respects
 ###############################################################
-if [[ -x "$(command -v thefuck)" ]]; then
-  eval "$(thefuck --alias)"
+if [[ -x "$(command -v pay-respects)" ]]; then
+  eval "$(pay-respects zsh --alias fuck)"
 else
-  echo "thefuck: command not found. Please check: https://github.com/nvbn/thefuck#installation"
+  echo "pay-respects: command not found. Please check: https://github.com/iffse/pay-respects"
 fi
 
 ###############################################################
