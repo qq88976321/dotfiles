@@ -103,6 +103,7 @@ source "$ZSH"/oh-my-zsh.sh
 alias ll='ls -alF'
 alias make='make -j8'
 alias lzd='lazydocker'
+alias ssh="kitty +kitten ssh"
 
 # docker
 alias lzd='lazydocker'
