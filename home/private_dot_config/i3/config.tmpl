@@ -216,6 +216,12 @@ bindsym Print exec flameshot gui
 # system lock
 bindsym Scroll_Lock exec i3lock-fancy
 
+# dunst (built-in [shortcuts] removed since dunst 1.7; drive via dunstctl)
+bindsym Ctrl+Shift+space     exec --no-startup-id dunstctl close
+bindsym Ctrl+Shift+BackSpace exec --no-startup-id dunstctl close-all
+bindsym Ctrl+Shift+grave     exec --no-startup-id dunstctl history-pop
+bindsym Ctrl+Shift+period    exec --no-startup-id dunstctl context
+
 ###############################################################
 # Custom setup
 ###############################################################
