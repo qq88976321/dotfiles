@@ -11,6 +11,7 @@ font pango:MesloLGS NF 8
 
 exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec systemctl --user restart fcitx5.service
 exec /usr/bin/gnome-keyring-daemon --start --components=secrets
 exec nm-applet --indicator
 exec mako
