@@ -1,0 +1,168 @@
+{{- if .is_desktop_env -}}
+// Waybar 雙螢幕雙面板設定 (Top & Bottom Bars)
+[
+    // ==========================================
+    // TOP BAR (上方狀態列)
+    // ==========================================
+    {
+        // 如果您想要強制綁定特定螢幕，可取消註解下方設定並修改輸出名稱 (如 "DP-1", "HDMI-A-1")
+        // "output": ["DP-1", "HDMI-A-1"],
+        "name": "top-bar",
+        "layer": "top",
+        "position": "top",
+        "height": 32, // 對應 Polybar 的 24pt
+        "spacing": 4,
+
+        "modules-left": [],
+        "modules-center": [
+            "custom/dunst",
+            "clock"
+        ],
+        "modules-right": [
+            "backlight",
+            "pulseaudio#microphone",
+            "pulseaudio",
+            "tray"
+        ],
+
+        // ------------------------------------------
+        // 上方面板模組設定
+        // ------------------------------------------
+
+        // Dunst 通知狀態切換
+        "custom/dunst": {
+            "exec": "dunstctl is-paused | grep -q 'true' && echo '' || echo ''",
+            "on-click": "dunstctl set-paused toggle; pkill -RTMIN+8 waybar",
+            "interval": 1,
+            "signal": 8,
+            "format": "<span color='#F0C674'>{}</span> <span color='#707880'>|</span>",
+            "tooltip": false
+        },
+
+        // 日期與時間 (點擊執行 gsimplecal)
+        "clock": {
+            "interval": 1,
+            "format": "<span color='#F0C674'>{:%Y/%m/%d(%a) %H:%M:%S}</span>",
+            "on-click": "LC_ALL=en_US.UTF-8 gsimplecal",
+            "tooltip": false
+        },
+
+        // 螢幕亮度
+        "backlight": {
+            "format": "<span color='#F0C674'>🔅</span> {percent}% <span color='#707880'>|</span>",
+            "scroll-step": 5,
+            "tooltip": false
+        },
+
+        // 麥克風音量輸入 (替代 wireplumber-input 腳本)
+        "pulseaudio#microphone": {
+            "format": "{format_source}",
+            "format-source": "<span color='#F0C674'>🎙</span> {volume}% <span color='#707880'>|</span>",
+            "format-source-muted": "<span color='#707880'>🎙 muted |</span>",
+            "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+            "on-click-right": "pavucontrol",
+            "scroll-step": 5,
+            "tooltip": false
+        },
+
+        // 揚聲器音量輸出 (替代 wireplumber-output 腳本)
+        "pulseaudio": {
+            "format": "<span color='#F0C674'>{icon}</span> {volume}% <span color='#707880'>|</span>",
+            "format-muted": "<span color='#707880'>🔇 muted |</span>",
+            "format-icons": {
+                "default": ["🔈", "🔉", "🔊"]
+            },
+            "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+            "on-click-right": "pavucontrol",
+            "scroll-step": 5,
+            "tooltip": false
+        },
+
+        // 系統托盤 (通常 Waybar 只會在主螢幕自動載入一個 Tray)
+        "tray": {
+            "icon-size": 16,
+            "spacing": 10
+        }
+    },
+
+    // ==========================================
+    // BOTTOM BAR (下方狀態列)
+    // ==========================================
+    {
+        // "output": ["DP-1", "HDMI-A-1"],
+        "name": "bottom-bar",
+        "layer": "top",
+        "position": "bottom",
+        "height": 24, // 對應 Polybar 的 18pt
+        "spacing": 4,
+
+        "modules-left": [
+            "sway/workspaces"     // 若使用 Sway 請使用此行 (i3 在 Wayland 的直接替代品)
+            // "hyprland/workspaces"  // 若使用 Hyprland 請取消註解此行，並註解上方 Sway 模組
+        ],
+        "modules-center": [],
+        "modules-right": [
+            "cpu",
+            "memory",
+            "network#wifi",
+            "network#ethernet",
+            "custom/powermenu"
+        ],
+
+        // ------------------------------------------
+        // 下方面板模組設定
+        // ------------------------------------------
+
+        // Sway 工作區設定 (對應 pin-workspaces 與 label 設定)
+        "sway/workspaces": {
+            "disable-scroll": true,
+            "all-outputs": false, // 只在當前螢幕顯示該螢幕的工作區 (Pin-workspaces)
+            "format": "{name}"
+        },
+
+        // Hyprland 工作區設定 (備用)
+        "hyprland/workspaces": {
+            "disable-scroll": true,
+            "all-outputs": false,
+            "format": "{name}"
+        },
+
+        // CPU 負載
+        "cpu": {
+            "interval": 5,
+            "format": "<span color='#F0C674'></span> {usage:2}% <span color='#707880'>|</span>",
+            "tooltip": false
+        },
+
+        // 記憶體使用率
+        "memory": {
+            "interval": 5,
+            "format": "<span color='#F0C674'></span> {percentage:2}% <span color='#707880'>|</span>",
+            "tooltip": false
+        },
+
+        // 無線網路 (未連線時自動隱藏，避免殘留多餘的分隔線符號)
+        "network#wifi": {
+            "interface": "wlan*",
+            "format-wifi": "<span color='#F0C674'></span> {ipaddr} <span color='#707880'>|</span>",
+            "format-disconnected": "",
+            "tooltip": false
+        },
+
+        // 有線網路 (未連線時自動隱藏)
+        "network#ethernet": {
+            "interface": "eth*",
+            "format-ethernet": "<span color='#F0C674'></span> {ipaddr} <span color='#707880'>|</span>",
+            "format-disconnected": "",
+            "tooltip": false
+        },
+
+        // 電源選單
+        "custom/powermenu": {
+            "format": "<span color='#F0C674'></span>",
+            "on-click": "~/.config/polybar/powermenu.sh", // 沿用您原先的腳本路徑
+            "tooltip": false
+        }
+    }
+]
+{{- end }}

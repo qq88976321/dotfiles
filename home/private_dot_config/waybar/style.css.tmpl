@@ -1,73 +1,103 @@
 {{- if .is_desktop_env -}}
+/* ==========================================
+   Waybar 樣式表 (配色與字型轉換自 Polybar)
+   ========================================== */
+
+/* 匯入 Polybar 調色盤變數 */
+@define-color background #282A2E;
+@define-color background-alt #373B41;
+@define-color foreground #C5C8C6;
+@define-color primary #F0C674;
+@define-color secondary #8ABEB7;
+@define-color highlight #A54242;
+@define-color alert #A54242;
+@define-color disabled #707880;
+
+/* 全域基礎重設 */
 * {
+    font-family: "MesloLGS NF", "Noto Color Emoji", sans-serif;
+    font-size: 13px; /* 配合面板高度設定的適中字型大小 */
+    font-weight: normal;
     border: none;
     border-radius: 0;
-    font-family: "MesloLGS NF", "Noto Color Emoji", monospace;
-    font-size: 12px;
     min-height: 0;
 }
 
+/* 移除預設背景 */
 window#waybar {
-    background: #282a2e;
-    color: #c5c8c6;
+    background-color: transparent;
+    color: @foreground;
 }
 
-window#waybar.bottom {
-    background: #000000;
+/* ==========================================
+   TOP BAR (上方狀態列專屬樣式)
+   ========================================== */
+window#waybar.top-bar {
+    background-color: @background;
+    color: @foreground;
 }
 
-#workspaces button {
-    padding: 0 8px;
-    color: #c5c8c6;
-    background: transparent;
-}
-
-#workspaces button.focused,
-#workspaces button.active {
-    background: #373b41;
-    color: #f0c674;
-    box-shadow: inset 0 -2px #f0c674;
-}
-
-#workspaces button.urgent {
-    background: #a54242;
-    color: #ffffff;
-}
-
-#workspaces button.empty {
-    color: #707880;
-}
-
-#mode,
+/* 調整上方面板各個模組之間的邊距 */
+#custom-dunst,
 #clock,
-#custom-notifications,
 #backlight,
-#wireplumber,
-#custom-mic,
-#tray,
+#pulseaudio,
+#tray {
+    padding: 0 4px;
+}
+
+/* ==========================================
+   BOTTOM BAR (下方狀態列專屬樣式)
+   ========================================== */
+window#waybar.bottom-bar {
+    background-color: #000000; /* 依據您的設定使用純黑底色 */
+    color: @foreground;
+}
+
+/* 調整下方面板各個模組之間的邊距 */
 #cpu,
 #memory,
 #network,
-#custom-power {
+#custom-powermenu {
+    padding: 0 4px;
+}
+
+/* ==========================================
+   WORKSPACES (工作區按鈕樣式)
+   ========================================== */
+#workspaces button {
     padding: 0 8px;
+    background-color: transparent;
+    color: @foreground;
+    border-bottom: 2px solid transparent; /* 預留底線寬度 */
 }
 
-#mode {
-    background: #373b41;
-    color: #f0c674;
+/* 當前活動/聚焦的工作區 (對應 label-active-background 與 Underline) */
+#workspaces button.focused,
+#workspaces button.active {
+    background-color: @background-alt;
+    color: @foreground;
+    border-bottom: 2px solid @primary; /* 使用 Primary 色的底邊框模擬底線 */
 }
 
-#clock,
-#custom-notifications,
-#wireplumber,
-#custom-mic,
-#network.ethernet,
-#custom-power {
-    color: #f0c674;
+/* 含有視窗的非活動工作區 */
+#workspaces button.visible {
+    color: @foreground;
 }
 
-#wireplumber.muted,
-#network.disconnected {
-    color: #707880;
+/* 緊急狀態工作區 (對應 label-urgent) */
+#workspaces button.urgent {
+    background-color: @alert;
+    color: @foreground;
+}
+
+/* 空白工作區 (對應 label-empty) */
+#workspaces button.empty {
+    color: @disabled;
+}
+
+/* 托盤調整 */
+#tray {
+    margin-right: 10px;
 }
 {{- end }}
