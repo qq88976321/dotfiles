@@ -103,7 +103,16 @@ source "$ZSH"/oh-my-zsh.sh
 alias ll='ls -alF'
 alias make='make -j8'
 alias lzd='lazydocker'
-alias ssh="kitty +kitten ssh"
+# Use kitty's ssh kitten only when attached directly to kitty (not through
+# tmux/screen or a plain terminal, and not on a host without the kitten binary
+# such as a jump host); otherwise fall back to native ssh.
+ssh() {
+  if [[ "$TERM" == "xterm-kitty" ]] && (( $+commands[kitten] )); then
+    kitten ssh "$@"
+  else
+    command ssh "$@"
+  fi
+}
 
 # docker
 alias lzd='lazydocker'
