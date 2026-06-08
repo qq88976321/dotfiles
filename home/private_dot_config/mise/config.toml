@@ -22,7 +22,8 @@ oras = "latest"
 pack = "latest"
 python = "3.14"
 rg = "latest"
-tmux = "latest"
+# tmux is intentionally NOT managed by mise: the aqua prebuilt build does not emit
+# OSC 52 (broken clipboard). Use the self-built /usr/local/bin/tmux instead.
 trivy = "latest"
 usage = "latest"
 zellij = "latest"
