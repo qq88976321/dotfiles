@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+set -eu
+
+if [ -n "${TMUX:-}" ] && command -v tmux >/dev/null 2>&1; then
+    tmux load-buffer -w -
+elif [ -n "${WAYLAND_DISPLAY:-}" ] && command -v wl-copy >/dev/null 2>&1; then
+    wl-copy
+elif [ -n "${DISPLAY:-}" ] && command -v xclip >/dev/null 2>&1; then
+    xclip -in -selection clipboard
+else
+    printf '%s\n' "clipboard-copy: no supported clipboard backend found" >&2
+    exit 1
+fi
