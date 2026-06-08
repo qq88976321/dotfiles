@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ -n "$WAYLAND_DISPLAY" ]; then
+    exec fuzzel --dmenu --prompt "dunst: "
+else
+    exec rofi -dmenu -p dunst:
+fi
