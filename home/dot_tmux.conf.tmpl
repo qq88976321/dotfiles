@@ -59,6 +59,10 @@ bind -T copy-mode-vi Escape send-keys -X cancel
 # enter copy mode and start searching, replacing tmux-copycat's prefix+/
 bind / copy-mode \; send-keys /
 
+# clear the Claude Code bell emoji from the window name when switching to it;
+# guarded so the hook stays silent on machines where the script is missing
+set-hook -g session-window-changed 'run-shell "[ -x ~/.claude/hooks/tmux-bell-clear.sh ] && ~/.claude/hooks/tmux-bell-clear.sh #{window_id} || true"'
+
 ###############################################################
 # Plugins
 ###############################################################
