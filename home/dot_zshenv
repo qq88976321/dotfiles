@@ -18,8 +18,9 @@ export VISUAL=vim
 export PAGER=less
 export LC_ALL=en_US.UTF-8
 
-# GPG TTY support
-export GPG_TTY=$(tty)
+# GPG TTY support. $TTY is a zsh builtin, so unlike $(tty) it does not
+# fork a process on every zsh invocation (including scripts).
+export GPG_TTY=$TTY
 
 export TIG_EDITOR=vim
 
