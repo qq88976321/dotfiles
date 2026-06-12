@@ -1,39 +1,34 @@
 [".vim/autoload/plug.vim"]
 type = "file"
-url = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-refreshPeriod = "168h"
+url = "https://raw.githubusercontent.com/junegunn/vim-plug/0.14.0/plug.vim"
 
+# oh-my-zsh has no release tags; pinned to a master commit instead
 [".oh-my-zsh"]
 type = "archive"
-url = "https://github.com/ohmyzsh/ohmyzsh/archive/master.tar.gz"
+url = "https://github.com/ohmyzsh/ohmyzsh/archive/c954bbb168fc645592c50017de0d0e138db8df5f.tar.gz"
 exact = true
 stripComponents = 1
-refreshPeriod = "168h"
 
 [".oh-my-zsh/custom/plugins/kubetail"]
 type = "archive"
-url = "https://github.com/johanhaleby/kubetail/archive/master.tar.gz"
+url = "https://github.com/johanhaleby/kubetail/archive/refs/tags/1.6.22.tar.gz"
 exact = true
 stripComponents = 1
-refreshPeriod = "168h"
 
 [".oh-my-zsh/custom/plugins/zsh-autosuggestions"]
 type = "archive"
-url = "https://github.com/zsh-users/zsh-autosuggestions/archive/master.tar.gz"
+url = "https://github.com/zsh-users/zsh-autosuggestions/archive/refs/tags/v0.7.1.tar.gz"
 exact = true
 stripComponents = 1
-refreshPeriod = "168h"
 
 [".oh-my-zsh/custom/plugins/zsh-syntax-highlighting"]
 type = "archive"
-url = "https://github.com/zsh-users/zsh-syntax-highlighting/archive/master.tar.gz"
+url = "https://github.com/zsh-users/zsh-syntax-highlighting/archive/refs/tags/0.8.0.tar.gz"
 exact = true
 stripComponents = 1
-refreshPeriod = "168h"
 
 [".oh-my-zsh/custom/themes/powerlevel10k"]
 type = "archive"
-url = "https://github.com/romkatv/powerlevel10k/archive/master.tar.gz"
+url = "https://github.com/romkatv/powerlevel10k/archive/refs/tags/v1.20.0.tar.gz"
 exact = true
 stripComponents = 1
-refreshPeriod = "168h"
