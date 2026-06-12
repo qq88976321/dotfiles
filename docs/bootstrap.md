@@ -4,8 +4,8 @@ Manual setup steps for a fresh Debian-based machine (Ubuntu / Kubuntu).
 
 These steps are intentionally NOT automated with `.chezmoiscripts`: they need
 sudo, change system state, or change so rarely that maintaining install
-scripts costs more than running a few commands by hand. The old scripts are
-kept in [`archived/`](../archived) for reference.
+scripts costs more than running a few commands by hand. The old scripts can
+be found in the git history (`git log --all -- '*chezmoiscripts*' archived`).
 
 Division of labor:
 
@@ -21,6 +21,13 @@ Division of labor:
 
 ```sh
 grep -v '^#' docs/pkglist | xargs sudo apt-get install -y
+```
+
+Container note: if `/etc/localtime` does not exist (common in minimal
+images), apt blocks on an interactive tzdata prompt. Create it first:
+
+```sh
+ln -snf /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 ```
 
 ## 2. Dotfiles
