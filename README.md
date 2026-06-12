@@ -194,3 +194,6 @@ First press the prefix key `ctrl`+`space`, released and then press the key liste
 ### vim
 
 TODO: still have a lot to learn
+
+See [Clipboard over OSC 52 (tmux + vim)](docs/clipboard-osc52.md) for how
+yanks reach the local clipboard over ssh and tmux.
