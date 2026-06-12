@@ -31,8 +31,15 @@
 	log = auto
 [push]
 	default = simple
+	; create the upstream branch on first push without --set-upstream
+	autoSetupRemote = true
 [pull]
 	rebase = true
+[branch]
+	; sort `git branch` by most recent activity
+	sort = -committerdate
+[column]
+	ui = auto
 [difftool]
 	prompt = false
 	# Be able to abort all diffs with `:cq` or `:cquit`
@@ -40,14 +47,20 @@
 [diff]
 	tool = vimdiff
 	algorithm = histogram
+	; highlight moved code differently from added/removed code
+	colorMoved = default
 [diff "sopsdiffer"]
 	textconv = sops -d
 [sequence]
 	editor = interactive-rebase-tool
 [merge]
 	ff = no
+	; show the common ancestor in conflict markers
+	conflictstyle = zdiff3
 [rebase]
 	autosquash = true
+	; move stacked branches along when rebasing their base
+	updateRefs = true
 [fetch]
 	prune = true
 [pager]
