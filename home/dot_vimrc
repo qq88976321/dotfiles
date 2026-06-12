@@ -1,6 +1,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " inspired by:
-"    - <https://github.com/amix/vimr>
+"    - <https://github.com/amix/vimrc>
 "    - <https://github.com/iggredible/Learn-Vim>
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -48,7 +48,6 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 " Other - Plugins that don't belong in other categories
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'editorconfig/editorconfig-vim'
-Plug 'takac/vim-hardtime'
 
 call plug#end()
 
