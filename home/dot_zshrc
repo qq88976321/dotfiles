@@ -91,6 +91,16 @@ plugins=(
 
 source "$ZSH"/oh-my-zsh.sh
 
+# Keep the completion dump compiled. compinit loads the .zwc only when it is
+# newer than the dump; a stale .zwc silently falls back to parsing the text
+# dump on every startup (~400ms). Recompile in the background when needed.
+{
+  if [[ -s "$ZSH_COMPDUMP" && ( ! -s "${ZSH_COMPDUMP}.zwc" || "$ZSH_COMPDUMP" -nt "${ZSH_COMPDUMP}.zwc" ) ]]; then
+    command rm -f "${ZSH_COMPDUMP}.zwc"
+    zcompile "$ZSH_COMPDUMP"
+  fi
+} &!
+
 ###############################################################
 # User configuration
 ###############################################################
