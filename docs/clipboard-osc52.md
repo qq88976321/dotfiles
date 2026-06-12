@@ -46,15 +46,21 @@ set -s set-clipboard external
 set -as terminal-features ',xterm-kitty:clipboard,tmux-256color:clipboard,screen-256color:clipboard'
 ```
 
-- `set-clipboard external` -- tmux accepts OSC 52 set requests from programs
-  inside it and forwards them to the outer terminal (instead of only storing
-  them in a tmux buffer).
+- `set-clipboard external` -- tmux accepts OSC 52 set requests and forwards
+  them to the outer terminal (instead of only storing them in a tmux buffer).
+  This reliably covers OSC 52 emitted by a normal shell command or by tmux
+  copy-mode.
 - `terminal-features ...:clipboard` -- tells tmux the outer terminal can
   handle clipboard escapes, so it is willing to forward them.
-- `allow-passthrough all` -- lets raw escape sequences pass through.
+- `allow-passthrough all` -- lets `ESC Ptmux; ... ESC \` passthrough sequences
+  reach the outer terminal verbatim.
 
-Without `set-clipboard external`, a yank would only land in a tmux paste
-buffer and never reach the real clipboard.
+In practice tmux does **not** reliably forward a *full-screen application's*
+plain OSC 52 (a yank from vim was dropped while the same escape from the shell
+worked). The robust fix is on the vim side: when `$TMUX` is set, vim wraps the
+OSC 52 in the passthrough sequence so tmux passes it straight through. That is
+why both `set-clipboard external` (shell/copy-mode) and `allow-passthrough all`
+(vim) are needed.
 
 ## vim: emitting the escape
 
@@ -78,7 +84,13 @@ function! s:Osc52Yank() abort
   if v:event.regtype ==# 'V'         " linewise: add the trailing newline
     call add(l:lines, '')
   endif
-  call echoraw("\<Esc>]52;c;" .. base64_encode(str2blob(l:lines)) .. "\<Esc>\\")
+  let l:seq = "\<Esc>]52;c;" .. base64_encode(str2blob(l:lines)) .. "\<Esc>\\"
+  if !empty($TMUX)
+    " tmux does not reliably forward a full-screen app's plain OSC 52, so wrap
+    " it in the tmux passthrough sequence; every inner Esc must be doubled.
+    let l:seq = "\<Esc>Ptmux;" .. substitute(l:seq, "\<Esc>", "\<Esc>\<Esc>", 'g') .. "\<Esc>\\"
+  endif
+  call echoraw(l:seq)
 endfunction
 
 augroup Osc52Clipboard
@@ -90,6 +102,11 @@ augroup END
 `TextYankPost` fires after every yank/delete; `v:event` describes it. We act
 only when `operator` is `y` (a yank) and the register is the unnamed/`+`/`*`
 one, then send the yanked lines out as OSC 52.
+
+When running inside tmux the plain OSC 52 is wrapped in the tmux passthrough
+sequence `ESC Ptmux; <inner, every ESC doubled> ESC \`. tmux unwraps it and
+re-emits the inner OSC 52 verbatim to the outer terminal (see the tmux section
+for why this is needed).
 
 ## Behavior
 

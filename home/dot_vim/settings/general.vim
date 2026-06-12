@@ -51,7 +51,14 @@ function! s:Osc52Yank() abort
   if v:event.regtype ==# 'V'
     call add(l:lines, '')
   endif
-  call echoraw("\<Esc>]52;c;" .. base64_encode(str2blob(l:lines)) .. "\<Esc>\\")
+  let l:seq = "\<Esc>]52;c;" .. base64_encode(str2blob(l:lines)) .. "\<Esc>\\"
+  if !empty($TMUX)
+    " tmux does not reliably forward a full-screen app's plain OSC 52, so wrap
+    " it in the tmux passthrough sequence (needs 'allow-passthrough on'); every
+    " inner Esc must be doubled.
+    let l:seq = "\<Esc>Ptmux;" .. substitute(l:seq, "\<Esc>", "\<Esc>\<Esc>", 'g') .. "\<Esc>\\"
+  endif
+  call echoraw(l:seq)
 endfunction
 
 augroup Osc52Clipboard
