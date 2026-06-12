@@ -31,12 +31,33 @@ au FocusGained,BufEnter * checktime
 " With a map leader it's possible to do extra key combinations
 let mapleader = "\<space>"
 
-" Paste copied text from the external program with just p
-" NOTE: vim --version should have the +clipboard or +xterm_clipboard flags
-set clipboard=unnamed,unnamedplus
+" Keep yanks/pastes in Vim's own registers: 'p' pastes instantly and never
+" reads the system clipboard (no OSC 52 read, no terminal permission prompts).
+set clipboard=
 
-" Prevent vim from clearing the clipboard on exit
-autocmd VimLeave * call system("clipboard-copy", getreg('+'))
+" Mirror every yank to the local clipboard via OSC 52. This writes through
+" tmux (set-clipboard external) and ssh to the terminal on the physical
+" machine, so 'y' lands in the local clipboard even on a remote host.
+" NOTE: vim --version should have the +clipboard feature.
+function! s:Osc52Yank() abort
+  if v:event.operator !=# 'y'
+    return
+  endif
+  let l:reg = v:event.regname
+  if l:reg !=# '' && l:reg !=# '+' && l:reg !=# '*'
+    return
+  endif
+  let l:lines = copy(v:event.regcontents)
+  if v:event.regtype ==# 'V'
+    call add(l:lines, '')
+  endif
+  call echoraw("\<Esc>]52;c;" .. base64_encode(str2blob(l:lines)) .. "\<Esc>\\")
+endfunction
+
+augroup Osc52Clipboard
+  autocmd!
+  autocmd TextYankPost * call s:Osc52Yank()
+augroup END
 
 set updatetime=100
 
