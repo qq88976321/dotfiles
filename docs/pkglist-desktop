@@ -1,0 +1,15 @@
+# Desktop packages for the i3 setup, installed via apt.
+# Skip this list on KDE/Kubuntu machines.
+# Usage: grep -v '^#' docs/pkglist-desktop | xargs sudo apt-get install -y
+alacritty
+dunst
+flameshot
+gsimplecal
+i3
+i3lock-fancy
+kolourpaint
+picom
+polybar
+rofi
+x11-xkb-utils
+xcape

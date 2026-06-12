@@ -79,6 +79,8 @@ $ sh -c "$(wget -qO- https://chezmoi.io/get)" -- init --apply qq88976321
 # [Git] Private git repository?
 ```
 
+For the full setup of a new machine (apt packages, mise, docker, self-built tools, fonts), see [docs/bootstrap.md](docs/bootstrap.md).
+
 ## Key Bindings
 
 Here are my daily used key bindings, which may not include all the key bindings supported by these tools.

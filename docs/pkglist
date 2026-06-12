@@ -1,0 +1,15 @@
+# Base CLI packages installed via apt on a new machine.
+# Usage: grep -v '^#' docs/pkglist | xargs sudo apt-get install -y
+bat
+build-essential
+curl
+git
+htop
+jq
+make
+sudo
+tig
+vim-gtk3
+wget
+xclip
+zsh
