@@ -68,7 +68,11 @@ augroup END
 
 set updatetime=100
 
-" Automatic undo persistence
+" Automatic undo persistence. Vim does not create the directory itself and
+" silently drops undo history when it is missing.
+if !isdirectory($HOME . '/.vim/undo_dir')
+    call mkdir($HOME . '/.vim/undo_dir', 'p', 0700)
+endif
 set undodir=~/.vim/undo_dir
 set undofile
 
