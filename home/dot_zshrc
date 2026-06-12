@@ -209,3 +209,13 @@ if [[ -x "$(command -v atuin)" ]]; then
 else
   echo "atuin: command not found. Please check: https://github.com/atuinsh/atuin"
 fi
+
+###############################################################
+# local settings
+###############################################################
+# Machine-specific interactive settings go in ~/.zshrc.local (mirrors the
+# ~/.zshenv.local hook) instead of editing the chezmoi-managed ~/.zshrc.
+local_zshrc_file="$HOME/.zshrc.local"
+if [[ -f "$local_zshrc_file" ]]; then
+  source "$local_zshrc_file"
+fi
