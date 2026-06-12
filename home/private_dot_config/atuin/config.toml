@@ -20,7 +20,8 @@
 # auto_sync = true
 
 ## enable or disable automatic update checks
-update_check = true
+## (disabled: the atuin binary is managed by mise, so the check is just noise)
+update_check = false
 
 ## address of the sync server
 # sync_address = "https://api.atuin.sh"
