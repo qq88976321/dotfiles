@@ -1,0 +1,11 @@
+# Machine-specific Host entries and keys live in ~/.ssh/config.local; each
+# machine manages its own keys and host list (internal hostnames and IPs are
+# deliberately kept out of the dotfiles repo).
+Include config.local
+
+# Reuse one connection per host so repeated ssh/git commands skip the
+# handshake. Sockets live in ~/.ssh/sockets (created by chezmoi).
+Host *
+    ControlMaster auto
+    ControlPath ~/.ssh/sockets/%r@%h-%p
+    ControlPersist 10m
