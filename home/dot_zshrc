@@ -209,10 +209,28 @@ else
 fi
 
 ###############################################################
+# completion caching
+###############################################################
+# Cache generated completions in $ZSH_CACHE_DIR/completions (already in
+# fpath) instead of generating them synchronously on every startup. The
+# cache is refreshed by a background job. On the first run the file does
+# not exist yet and compinit has already scanned fpath, so bridge the
+# completion manually (same pattern as the oh-my-zsh docker plugin).
+_cache_completion() {
+  local name="$1"; shift
+  if [[ ! -f "$ZSH_CACHE_DIR/completions/_$name" ]]; then
+    typeset -g -A _comps
+    autoload -Uz "_$name"
+    _comps[$name]="_$name"
+  fi
+  "$@" >| "$ZSH_CACHE_DIR/completions/_$name" &|
+}
+
+###############################################################
 # uv
 ###############################################################
 if [[ -x "$(command -v uv)" ]]; then
-  source <(uv generate-shell-completion zsh)
+  _cache_completion uv uv generate-shell-completion zsh
 else
   echo "uv: command not found. Please check: https://github.com/astral-sh/uv?tab=readme-ov-file#installation"
 fi
@@ -230,8 +248,7 @@ fi
 # chezmoi: https://github.com/twpayne/chezmoi
 ###############################################################
 if [[ -x "$(command -v chezmoi)" ]]; then
-  source <(chezmoi completion zsh)
-  compdef _chezmoi chezmoi
+  _cache_completion chezmoi chezmoi completion zsh
 else
   echo "chezmoi: command not found. Please check: https://www.chezmoi.io/install"
 fi
@@ -240,7 +257,7 @@ fi
 # atuin: https://github.com/atuinsh/atuin
 ###############################################################
 if [[ -x "$(command -v atuin)" ]]; then
-    source <(atuin gen-completions --shell zsh)
+    _cache_completion atuin atuin gen-completions --shell zsh
 
     # eval "$(atuin init zsh --disable-up-arrow)"
     # workaround for --disable-up-arrow not work
