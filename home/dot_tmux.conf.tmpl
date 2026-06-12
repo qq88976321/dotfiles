@@ -56,6 +56,9 @@ bind -n TripleClick1Pane select-pane \; copy-mode \; send -X select-line \; send
 # exit copy mode
 bind -T copy-mode-vi Escape send-keys -X cancel
 
+# enter copy mode and start searching, replacing tmux-copycat's prefix+/
+bind / copy-mode \; send-keys /
+
 ###############################################################
 # Plugins
 ###############################################################
@@ -81,9 +84,6 @@ set -g @tmux_power_prefix_highlight_pos 'R'
 set -g @plugin 'tmux-plugins/tmux-yank'
 set -g @override_copy_command 'tmux load-buffer -w -'
 set -g @yank_action 'copy-pipe-no-clear'
-
-# enhances tmux search
-set -g @plugin 'tmux-plugins/tmux-copycat'
 
 # quick opening of a highlighted file or url
 set -g @plugin 'tmux-plugins/tmux-open'
