@@ -36,7 +36,7 @@ set -g mouse on
 # word separators
 setw -g word-separators ' @"=()[]'
 
-# ref: https://www.seanh.cc/2020/12/27/copy-and-paste-in-tmux/
+# OSC 52 clipboard forwarding; see docs/clipboard-osc52.md in this repo
 set -s set-clipboard external
 set -as terminal-features ',xterm-kitty:clipboard,tmux-256color:clipboard,screen-256color:clipboard'
 set -s copy-command 'tmux load-buffer -w -'
