@@ -51,6 +51,13 @@ Plug 'editorconfig/editorconfig-vim'
 
 call plug#end()
 
+" chezmoi downloads plug.vim itself (.chezmoiexternal.toml); this installs
+" any missing plugins on startup so a fresh machine bootstraps itself.
+autocmd VimEnter *
+    \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+    \|     PlugInstall --sync | source $MYVIMRC
+    \| endif
+
 " General Settings
 source ~/.vim/settings/general.vim
 
