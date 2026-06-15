@@ -23,6 +23,7 @@ HIST_STAMPS="yyyy-mm-dd"
 
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  command-not-found
   cp
   docker
   docker-compose
@@ -209,6 +210,40 @@ if [[ -x "$(command -v atuin)" ]]; then
 else
   echo "atuin: command not found. Please check: https://github.com/atuinsh/atuin"
 fi
+
+###############################################################
+# command-not-found: lazy install hints, then distro suggester
+###############################################################
+# The omz command-not-found plugin (loaded above) defines
+# command_not_found_handler to query the distro package db. Preserve it under
+# a new name, then wrap it: print a known install hint for expected tools and
+# delegate everything else to the distro suggester.
+(( $+functions[command_not_found_handler] )) && \
+  functions[_omz_cnf_handler]=$functions[command_not_found_handler]
+
+typeset -gA _install_hints=(
+  mise         'https://mise.jdx.dev/getting-started.html'
+  fzf          'https://github.com/junegunn/fzf#installation'
+  zoxide       'https://github.com/ajeetdsouza/zoxide#installation'
+  atuin        'https://github.com/atuinsh/atuin'
+  pay-respects 'https://github.com/iffse/pay-respects'
+  chezmoi      'https://www.chezmoi.io/install'
+  uv           'https://github.com/astral-sh/uv#installation'
+)
+
+command_not_found_handler() {
+  local cmd="$1"
+  if [[ -n "${_install_hints[$cmd]}" ]]; then
+    print -u2 "$cmd: not installed. Install: ${_install_hints[$cmd]}"
+    return 127
+  fi
+  if (( $+functions[_omz_cnf_handler] )); then
+    _omz_cnf_handler "$@"
+    return $?
+  fi
+  print -u2 "zsh: command not found: $cmd"
+  return 127
+}
 
 ###############################################################
 # local settings
