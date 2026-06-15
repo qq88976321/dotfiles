@@ -183,6 +183,39 @@ _cache_completion uv      uv generate-shell-completion zsh
 _cache_completion chezmoi chezmoi completion zsh
 _cache_completion atuin   atuin gen-completions --shell zsh
 
+# cobra-style: <tool> completion zsh
+_cache_completion helmfile              helmfile completion zsh
+_cache_completion k9s                   k9s completion zsh
+_cache_completion argocd                argocd completion zsh
+_cache_completion kubectl-argo-rollouts kubectl-argo-rollouts completion zsh
+_cache_completion codex                 codex completion zsh
+_cache_completion opencode              opencode completion zsh
+_cache_completion golangci-lint         golangci-lint completion zsh
+_cache_completion npm                   npm completion zsh
+
+# gh / glab use a -s flag
+_cache_completion gh   gh completion -s zsh
+_cache_completion glab glab completion -s zsh
+
+# clap / tool-specific flag forms
+_cache_completion yq     yq shell-completion zsh
+_cache_completion rustup rustup completions zsh
+_cache_completion cargo  rustup completions zsh cargo
+_cache_completion ruff   ruff generate-shell-completion zsh
+_cache_completion ty     ty generate-shell-completion zsh
+_cache_completion just   just --completions zsh
+_cache_completion fd     fd --gen-completions zsh
+_cache_completion rg     rg --generate complete-zsh
+
+# kubectl family aliases. `kubecolor completion zsh` emits kubectl's own
+# completion (#compdef kubectl, function _kubectl), so saving it as _kubecolor
+# breaks the autoload guard; reuse the working _kubectl instead. The omz
+# kubectl plugin aliases k=kubectl but never registers its completion.
+if (( $+_comps[kubectl] )); then
+  (( $+commands[kubecolor] )) && compdef kubecolor=kubectl
+  compdef k=kubectl
+fi
+
 ###############################################################
 # command-not-found: lazy install hints, then distro suggester
 ###############################################################
