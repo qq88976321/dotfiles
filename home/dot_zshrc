@@ -147,18 +147,30 @@ fi
 # completion caching
 ###############################################################
 # Cache generated completions in $ZSH_CACHE_DIR/completions (already in
-# fpath) instead of generating them synchronously on every startup. The
-# cache is refreshed by a background job. On the first run the file does
-# not exist yet and compinit has already scanned fpath, so bridge the
-# completion manually (same pattern as the oh-my-zsh docker plugin).
+# fpath) instead of generating them synchronously on every startup.
+#
+# Usage: _cache_completion <name> <generator-cmd...>
+#   <name> is the completion name (file becomes _<name>); the first word of
+#   the generator command is the binary that must exist.
+#
+# Skips entirely when the generator binary is absent, so calls for tools not
+# installed on this machine are free. On the first run the file does not exist
+# yet and compinit has already scanned fpath, so bridge the completion manually
+# (same pattern as the oh-my-zsh docker plugin). Regeneration only runs when the
+# binary is newer than the cached file (a version bump) or the cache is empty,
+# which keeps startup cheap even with many registered tools.
 _cache_completion() {
   local name="$1"; shift
-  if [[ ! -f "$ZSH_CACHE_DIR/completions/_$name" ]]; then
+  (( $+commands[$1] )) || return
+  local comp="$ZSH_CACHE_DIR/completions/_$name"
+  if [[ ! -f "$comp" ]]; then
     typeset -g -A _comps
     autoload -Uz "_$name"
     _comps[$name]="_$name"
   fi
-  "$@" >| "$ZSH_CACHE_DIR/completions/_$name" &|
+  if [[ ! -s "$comp" || "$commands[$1]" -nt "$comp" ]]; then
+    "$@" >| "$comp" &|
+  fi
 }
 
 ###############################################################
