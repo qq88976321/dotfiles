@@ -124,31 +124,23 @@ else
 fi
 
 ###############################################################
-# mise
+# tool init hooks
 ###############################################################
-if [[ -x "$(command -v mise)" ]]; then
-  eval "$(mise activate zsh)"
-else
-  echo "mise: command not found. Please check: https://mise.jdx.dev/getting-started.html#installing-mise-cli"
-fi
+# Order matters: mise activate must run first because it puts mise-managed
+# tools (fzf, atuin, glab, fd, rg, ...) onto PATH for the checks below.
+# Missing tools stay silent here; install hints fire lazily via the
+# command-not-found handler defined later.
+(( $+commands[mise] ))         && eval "$(mise activate zsh)"
+(( $+commands[fzf] ))          && source <(fzf --zsh)   # key bindings + fuzzy completion
+(( $+commands[zoxide] ))       && eval "$(zoxide init zsh)"
+(( $+commands[pay-respects] )) && eval "$(pay-respects zsh --alias fuck)"
 
-###############################################################
-# fuzzy finder
-###############################################################
-if [[ -x "$(command -v fzf)" ]]; then
-  # Set up fzf key bindings and fuzzy completion
-  source <(fzf --zsh)
-else
-  echo "fzf: init script not found. Please check: https://github.com/junegunn/fzf#installation"
-fi
-
-###############################################################
-# zoxide
-###############################################################
-if [[ -x "$(command -v zoxide)" ]]; then
-  eval "$(zoxide init zsh)"
-else
-  echo "zoxide: command not found. Please check: https://github.com/ajeetdsouza/zoxide#installation"
+if (( $+commands[atuin] )); then
+  # --disable-up-arrow does not work, so unbind everything via ATUIN_NOBIND
+  # and rebind only ctrl-r to the atuin search widget.
+  export ATUIN_NOBIND="true"
+  eval "$(atuin init zsh)"
+  bindkey '^r' _atuin_search_widget
 fi
 
 ###############################################################
@@ -170,46 +162,14 @@ _cache_completion() {
 }
 
 ###############################################################
-# uv
+# cached completions (registrations)
 ###############################################################
-if [[ -x "$(command -v uv)" ]]; then
-  _cache_completion uv uv generate-shell-completion zsh
-else
-  echo "uv: command not found. Please check: https://github.com/astral-sh/uv?tab=readme-ov-file#installation"
-fi
-
-###############################################################
-# pay-respects
-###############################################################
-if [[ -x "$(command -v pay-respects)" ]]; then
-  eval "$(pay-respects zsh --alias fuck)"
-else
-  echo "pay-respects: command not found. Please check: https://github.com/iffse/pay-respects"
-fi
-
-###############################################################
-# chezmoi: https://github.com/twpayne/chezmoi
-###############################################################
-if [[ -x "$(command -v chezmoi)" ]]; then
-  _cache_completion chezmoi chezmoi completion zsh
-else
-  echo "chezmoi: command not found. Please check: https://www.chezmoi.io/install"
-fi
-
-###############################################################
-# atuin: https://github.com/atuinsh/atuin
-###############################################################
-if [[ -x "$(command -v atuin)" ]]; then
-    _cache_completion atuin atuin gen-completions --shell zsh
-
-    # eval "$(atuin init zsh --disable-up-arrow)"
-    # workaround for --disable-up-arrow not work
-    export ATUIN_NOBIND="true"
-    eval "$(atuin init zsh)"
-    bindkey '^r' _atuin_search_widget
-else
-  echo "atuin: command not found. Please check: https://github.com/atuinsh/atuin"
-fi
+# Completions cached in $ZSH_CACHE_DIR/completions and refreshed in the
+# background. Missing-tool hints are handled by command-not-found, so no
+# per-tool fallback echo here.
+_cache_completion uv      uv generate-shell-completion zsh
+_cache_completion chezmoi chezmoi completion zsh
+_cache_completion atuin   atuin gen-completions --shell zsh
 
 ###############################################################
 # command-not-found: lazy install hints, then distro suggester
