@@ -28,7 +28,7 @@ My linux dotfiles and daily used tools, managed with [chezmoi](https://www.chezm
 ## Preface
 
 - **Window Manager**: i3-wm with polybar
-- **Terminal**: alacritty with tmux
+- **Terminal**: kitty with tmux
 - **Shell**: zsh with powerlevel10k
 - **Editor**: mainly vscode (which is not included in the dotfiles), but also vim for quick edit in terminal
 
@@ -47,7 +47,7 @@ The installation ways of these tools may vary depending on your Linux distributi
 - [polybar](https://github.com/polybar/polybar)
 - [rofi](https://github.com/davatorium/rofi)
 - [dunst](https://github.com/dunst-project/dunst)
-- [alacritty](https://github.com/alacritty/alacritty)
+- [kitty](https://github.com/kovidgoyal/kitty)
 - [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
 - [tmux](https://github.com/tmux/tmux)
 - [mise](https://github.com/jdx/mise)
