@@ -10,6 +10,7 @@ crane = "latest"
 fd = "latest"
 fzf = "latest"
 gemini-cli = "latest"
+git-cliff = "latest"
 glab = { version = "latest", provider = "gitlab", exe = "glab" }
 go = "1.26"
 just = "latest"
