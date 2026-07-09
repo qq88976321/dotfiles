@@ -33,13 +33,20 @@ split_horizontal = "prefix+minus"
 # herdr's workspace picker is the same idea and already lives on prefix+w.
 workspace_picker = "prefix+w"
 
-# Closest thing to tmux copy-mode (prefix+/ search, vi selection):
-# opens the pane scrollback in $EDITOR, where vi search/yank works.
+# tmux: bind / copy-mode + search. herdr has a vi-style copy mode
+# (motions, selection, yank) but no in-mode search yet; for searching,
+# edit_scrollback opens the scrollback in $EDITOR where / works.
+copy_mode = "prefix+/"
 edit_scrollback = "prefix+e"
 
+# tmux-sensible habit: keep ctrl held after the prefix, so both
+# prefix n and prefix ctrl+n switch tabs (tmux C-n/C-p).
+next_tab = ["prefix+n", "prefix+ctrl+n"]
+previous_tab = ["prefix+p", "prefix+ctrl+p"]
+
 # Defaults that already match the tmux muscle memory (listed for reference,
-# no need to override): new_tab prefix+c, next/previous_tab prefix+n/p,
-# switch_tab prefix+1..9, zoom prefix+z, focus_pane_* prefix+h/j/k/l.
+# no need to override): new_tab prefix+c, switch_tab prefix+1..9,
+# zoom prefix+z, focus_pane_* prefix+h/j/k/l.
 
 ###############################################################
 # UI
