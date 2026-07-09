@@ -45,13 +45,19 @@ set -s copy-command 'tmux load-buffer -w -'
 bind -T copy-mode-vi v send-keys -X begin-selection
 bind -T copy-mode-vi q send-keys -X stop-selection
 
-# double click to select and copy a word
+# double click to select and copy a word.
+# The -n binding only does tmux's own copy-mode selection when the foreground
+# app has NOT captured the mouse. When an app has mouse reporting on
+# (mouse_any_flag), e.g. Claude Code fullscreen / vim / htop, forward the event
+# so the app handles the double-click itself, avoiding a doubled selection.
 bind -T copy-mode-vi DoubleClick1Pane select-pane \; send -X select-word \; send -X copy-pipe-no-clear "tmux load-buffer -w -"
-bind -n DoubleClick1Pane select-pane \; copy-mode \; send -X select-word \; send -X copy-pipe-no-clear "tmux load-buffer -w -"
+bind -n DoubleClick1Pane select-pane \; if -F '#{||:#{pane_in_mode},#{mouse_any_flag}}' { send -M } { copy-mode ; send -X select-word ; send -X copy-pipe-no-clear 'tmux load-buffer -w -' }
 
-# triple click to select and copy a line
+# triple click to select and copy a line. Same mouse_any_flag guard as the
+# double-click binding above: forward to a mouse-capturing foreground app,
+# otherwise do tmux's own line selection.
 bind -T copy-mode-vi TripleClick1Pane select-pane \; send -X select-line \; send -X copy-pipe-no-clear "tmux load-buffer -w -"
-bind -n TripleClick1Pane select-pane \; copy-mode \; send -X select-line \; send -X copy-pipe-no-clear "tmux load-buffer -w -"
+bind -n TripleClick1Pane select-pane \; if -F '#{||:#{pane_in_mode},#{mouse_any_flag}}' { send -M } { copy-mode ; send -X select-line ; send -X copy-pipe-no-clear 'tmux load-buffer -w -' }
 
 # exit copy mode
 bind -T copy-mode-vi Escape send-keys -X cancel
