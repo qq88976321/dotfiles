@@ -46,11 +46,11 @@ workspace_picker = "prefix+w"
 # popup; this is the direct-select equivalent). Raw ctrl+1..9, no prefix.
 focus_agent = "ctrl+1..9"
 
-# tmux: bind / copy-mode + search. herdr has a vi-style copy mode
-# (motions, selection, yank) but no in-mode search yet; for searching,
-# edit_scrollback opens the scrollback in $EDITOR where / works.
-# prefix+[ is the stock tmux copy-mode entry, kept as an alias.
-copy_mode = ["prefix+/", "prefix+["]
+# prefix+[ is the stock tmux copy-mode entry: native copy mode, full
+# scrollback, no search. prefix+/ (tmux: copy-mode + search) opens the
+# copy-search plugin below, which has in-mode search but only sees the
+# most recent ~1000 lines (herdr pane read server cap).
+copy_mode = "prefix+["
 edit_scrollback = "prefix+e"
 
 focus_pane_up = ["prefix+k", "prefix+up"]
@@ -78,6 +78,26 @@ open_notification_target = "prefix+shift+o"          # moved off prefix+o
 # Defaults that already match the tmux muscle memory (listed for reference,
 # no need to override): new_tab prefix+c, switch_tab prefix+1..9,
 # zoom prefix+z, close_pane prefix+x, help prefix+?.
+
+# copy-search plugin (~/projects/herdr-copy-search): tmux-style copy
+# mode with incremental search, copycat patterns (p menu / alt+key),
+# and extrakto-style extraction; copies via OSC 52.
+
+# tmux: bind / copy-mode + search; Esc from the prompt drops into the
+# plugin's copy mode.
+[[keys.command]]
+key = "prefix+/"
+type = "shell"
+command = "herdr plugin pane open --plugin copy-search --entrypoint search"
+description = "scrollback search (copy-search)"
+
+# extrakto (tmux: prefix+tab popup): enter inserts, tab copies,
+# ctrl+t toggles word/line.
+[[keys.command]]
+key = "prefix+tab"
+type = "shell"
+command = "herdr plugin pane open --plugin copy-search --entrypoint extract"
+description = "extract tokens (copy-search)"
 
 ###############################################################
 # UI
