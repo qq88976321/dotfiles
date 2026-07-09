@@ -31,8 +31,9 @@ green = "#009e73"
 # tmux: set -g prefix C-Space
 prefix = "ctrl+space"
 
-# tmux: bind | split-window -h  (panes side by side)
-split_vertical = "prefix+|"
+# tmux: bind | split-window -h  (panes side by side); prefix+v is the
+# herdr default, kept as a secondary alias.
+split_vertical = ["prefix+v", "prefix+|"]
 # tmux: bind - split-window -v  (panes stacked); same as the herdr default,
 # kept explicit to document the tmux parity.
 split_horizontal = "prefix+minus"
