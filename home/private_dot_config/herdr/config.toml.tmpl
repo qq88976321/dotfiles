@@ -43,7 +43,8 @@ workspace_picker = "prefix+w"
 # tmux: bind / copy-mode + search. herdr has a vi-style copy mode
 # (motions, selection, yank) but no in-mode search yet; for searching,
 # edit_scrollback opens the scrollback in $EDITOR where / works.
-copy_mode = "prefix+/"
+# prefix+[ is the stock tmux copy-mode entry, kept as an alias.
+copy_mode = ["prefix+/", "prefix+["]
 edit_scrollback = "prefix+e"
 
 # tmux-sensible habit: keep ctrl held after the prefix, so both
@@ -51,9 +52,17 @@ edit_scrollback = "prefix+e"
 next_tab = ["prefix+n", "prefix+ctrl+n"]
 previous_tab = ["prefix+p", "prefix+ctrl+p"]
 
+# tmux default-key parity; herdr defaults are kept as secondary
+# bindings where they do not collide.
+detach = "prefix+d"                                  # tmux: d, herdr: q
+rename_tab = ["prefix+comma", "prefix+shift+t"]      # tmux: , renames window
+rename_workspace = ["prefix+$", "prefix+shift+w"]    # tmux: $ renames session
+close_tab = ["prefix+ampersand", "prefix+shift+x"]   # tmux: & kills window
+last_pane = "prefix+;"                               # tmux: ; last active pane
+
 # Defaults that already match the tmux muscle memory (listed for reference,
 # no need to override): new_tab prefix+c, switch_tab prefix+1..9,
-# zoom prefix+z, focus_pane_* prefix+h/j/k/l.
+# zoom prefix+z, close_pane prefix+x, help prefix+?.
 
 ###############################################################
 # UI
