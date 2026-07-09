@@ -1,0 +1,81 @@
+# herdr configuration, mirroring the tmux habits in dot_tmux.conf.tmpl.
+# Reload a running server with: herdr server reload-config
+
+# First-run onboarding already done; do not show it again.
+onboarding = false
+
+###############################################################
+# Theme (tmux: wfxr/tmux-power, gold on the office desktop, sky elsewhere)
+###############################################################
+[theme]
+{{- if eq .chezmoi.hostname "11301-DT-021" }}
+# Closest built-in to tmux-power "gold": warm yellow/brown palette.
+name = "gruvbox"
+{{- else }}
+# Closest built-in to tmux-power "sky": cool blue palette.
+name = "tokyo-night"
+{{- end }}
+
+###############################################################
+# Keys
+###############################################################
+[keys]
+# tmux: set -g prefix C-Space
+prefix = "ctrl+space"
+
+# tmux: bind | split-window -h  (panes side by side)
+split_vertical = "prefix+|"
+# tmux: bind - split-window -v  (panes stacked); same as the herdr default,
+# kept explicit to document the tmux parity.
+split_horizontal = "prefix+minus"
+
+# tmux: bind w ... tmux-window-jump (unified session+window picker).
+# herdr's workspace picker is the same idea and already lives on prefix+w.
+workspace_picker = "prefix+w"
+
+# Closest thing to tmux copy-mode (prefix+/ search, vi selection):
+# opens the pane scrollback in $EDITOR, where vi search/yank works.
+edit_scrollback = "prefix+e"
+
+# Defaults that already match the tmux muscle memory (listed for reference,
+# no need to override): new_tab prefix+c, next/previous_tab prefix+n/p,
+# switch_tab prefix+1..9, zoom prefix+z, focus_pane_* prefix+h/j/k/l.
+
+###############################################################
+# UI
+###############################################################
+[ui]
+# tmux: set -g mouse on. herdr default is already true; kept explicit.
+# Pane apps that request mouse (Claude Code, vim, htop) still receive it,
+# which covers the mouse_any_flag forwarding hacks from tmux.conf.
+mouse_capture = true
+
+# Replaces the cc-window-name automatic-rename habit: show the detected
+# agent (claude, codex, ...) on split pane borders when no manual name is set.
+show_agent_labels_on_pane_borders = true
+
+# tmux: allow-passthrough for Claude Code notifications. herdr forwards
+# agent notifications to the outer terminal as desktop notifications.
+[ui.toast]
+delivery = "terminal"
+
+###############################################################
+# Session persistence (tmux: resurrect + continuum)
+###############################################################
+[session]
+# Resume AI-agent panes into their native conversation sessions after a
+# server restart; herdr default, kept explicit as the resurrect stand-in.
+resume_agents_on_restore = true
+
+[experimental]
+# Save recent pane screen history across full server restarts.
+# Off for now; flip to true for behavior closer to tmux-resurrect.
+pane_history = false
+
+###############################################################
+# Scrollback (tmux: history-limit 30000 lines)
+###############################################################
+[advanced]
+# herdr counts bytes, not lines. The 10 MB default already exceeds
+# 30000 lines of typical output; kept explicit to record the intent.
+scrollback_limit_bytes = 10000000
