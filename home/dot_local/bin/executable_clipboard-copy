@@ -2,12 +2,16 @@
 set -eu
 
 if [ -n "${TMUX:-}" ] && command -v tmux >/dev/null 2>&1; then
+    # tmux forwards to the outer terminal via OSC 52 (set-clipboard external)
+    # and also populates the tmux paste buffer.
     tmux load-buffer -w -
-elif [ -n "${WAYLAND_DISPLAY:-}" ] && command -v wl-copy >/dev/null 2>&1; then
-    wl-copy
-elif [ -n "${DISPLAY:-}" ] && command -v xclip >/dev/null 2>&1; then
-    xclip -in -selection clipboard
 else
-    printf '%s\n' "clipboard-copy: no supported clipboard backend found" >&2
-    exit 1
+    # herdr / direct kitty|alacritty|Windows Terminal / plain SSH: emit OSC 52
+    # to the controlling terminal, which forwards it to the system clipboard.
+    # All terminals in use support OSC 52.
+    b64=$(base64 | tr -d '\n')
+    if ! printf '\033]52;c;%s\a' "$b64" > /dev/tty 2>/dev/null; then
+        printf '%s\n' "clipboard-copy: no controlling terminal for OSC 52" >&2
+        exit 1
+    fi
 fi
