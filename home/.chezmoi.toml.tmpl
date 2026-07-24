@@ -3,6 +3,7 @@
 {{- $name := promptStringOnce . "name" "[Git] Username" -}}
 {{- $email := promptStringOnce . "email" "[Git] Email address" -}}
 {{- $private_git_repo := promptStringOnce . "private_git_repo" "[Git] Private git repository" -}}
+{{- $mr_namespaces := promptStringOnce . "mr_namespaces" "[Git] MR namespaces for kitty URL hints (comma-separated, blank to skip)" "" -}}
 
 [data]
 is_desktop_env = {{ $is_desktop_env }}
@@ -10,3 +11,4 @@ is_desktop_env = {{ $is_desktop_env }}
 name = {{ $name | quote }}
 email = {{ $email | quote }}
 private_git_repo = {{ $private_git_repo | quote }}
+mr_namespaces = {{ $mr_namespaces | quote }}

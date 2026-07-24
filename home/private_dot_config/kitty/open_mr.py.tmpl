@@ -1,0 +1,41 @@
+import re
+import subprocess
+import sys
+
+{{- if .mr_namespaces }}
+# Detect GitLab MR references for the configured namespaces and open the most
+# recent one on the visible screen. Namespaces and host come from the local
+# chezmoi config (not committed), so no private keywords live in the repo.
+PATTERN = re.compile(
+    r'\b(?P<path>(?:{{ .mr_namespaces | replace " " "" | replace "," "|" }})(?:/[A-Za-z0-9][A-Za-z0-9._-]*)+)!(?P<num>\d+)'
+)
+HOST = "{{ .private_git_repo }}"
+{{- else }}
+# No MR namespaces configured on this machine: do nothing.
+PATTERN = re.compile(r'(?!)')
+HOST = ""
+{{- end }}
+
+
+def mr_url(text):
+    matches = list(PATTERN.finditer(text))
+    if not matches or not HOST:
+        return None
+    m = matches[-1]  # bottom-most == most recent reference on screen
+    return 'https://{host}/{path}/-/merge_requests/{num}'.format(
+        host=HOST, path=m.group('path'), num=m.group('num'),
+    )
+
+
+def main():
+    url = mr_url(sys.stdin.read())
+    if url:
+        subprocess.Popen(
+            ['xdg-open', url],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+
+
+if __name__ == '__main__':
+    main()
