@@ -1,0 +1,67 @@
+# Switch between git worktrees, cd-ing in place.
+#
+# Changing directory is the whole point, and an external command cannot cd
+# the shell that invoked it (upstream git-worktree-switcher works around that
+# with `cd $dir; exec $SHELL`, which stacks a nested zsh per jump and kills
+# `cd -` and the dir stack), so wt has to be a shell function. This replaces
+# the former ~/.local/bin/wt fork entirely; the porcelain/fzf plumbing is
+# lifted from it.
+#
+# Autoloaded (body-only style) from ~/.config/zsh/functions via ~/.zshrc.
+
+local dir
+case "$1" in
+  list)
+    git worktree list
+    return
+    ;;
+  help)
+    print -- "wt lets you switch between your git worktrees with speed."
+    print -- ""
+    print -- "Usage:"
+    print -- "  wt <name>  cd to the first worktree whose path contains <name>"
+    print -- "  wt -i      pick a worktree with fzf (bare wt does the same)"
+    print -- "  wt -       cd to the main worktree"
+    print -- "  wt list    list worktrees"
+    print -- "  wt help    show this message"
+    return
+    ;;
+  update|version)
+    print -u2 "wt: this is a zsh function managed by chezmoi, not the upstream binary"
+    return 1
+    ;;
+  -)
+    # git prints its own error when this is not a repo.
+    dir=$(git worktree list --porcelain |
+      awk '/^worktree /{print substr($0, 10); exit}')
+    [[ -n $dir ]] || return 1
+    ;;
+  ''|-i)
+    if ! (( $+commands[fzf] )); then
+      print -u2 "wt: fzf is required for interactive mode"
+      print -u2 "Install from: https://github.com/junegunn/fzf#installation"
+      return 1
+    fi
+    # Anchor the awk patterns: an unanchored /worktree/ also matches
+    # "branch refs/heads/worktree-foo" and clobbers the path with the ref.
+    dir=$(git worktree list --porcelain |
+      awk '/^worktree /{wt=substr($0, 10)}
+           /^branch /{ref=substr($0, 8); sub(/^refs\/heads\//, "", ref); print wt " [" ref "]"}
+           /^detached$/{print wt " [detached]"}' |
+      fzf --height=10% --no-multi --exit-0 |
+      sed 's/ \[[^]]*\]$//')
+    # Empty means fzf was cancelled (or git failed and said so): not an error.
+    [[ -n $dir ]] || return 0
+    ;;
+  *)
+    # Substring match on the path only; upstream matched the whole porcelain
+    # line as a regex, where a query like "worktree" matched every entry.
+    dir=$(git worktree list --porcelain |
+      awk -v q="$1" '/^worktree /{p=substr($0, 10); if (index(p, q)) {print p; exit}}')
+    if [[ -z $dir ]]; then
+      print -u2 "wt: no worktree matched: $1"
+      return 1
+    fi
+    ;;
+esac
+cd -- "$dir"

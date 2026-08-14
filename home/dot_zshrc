@@ -144,6 +144,16 @@ if (( $+commands[atuin] )); then
 fi
 
 ###############################################################
+# autoloaded functions
+###############################################################
+# One body-only file per function in ~/.config/zsh/functions, read lazily on
+# first call. wt lives there: changing directory is its whole point and an
+# external command cannot cd the shell that invoked it, so it must be a
+# function (rationale in the file).
+fpath=(~/.config/zsh/functions $fpath)
+autoload -Uz wt
+
+###############################################################
 # completion caching
 ###############################################################
 # Cache generated completions in $ZSH_CACHE_DIR/completions (already in
