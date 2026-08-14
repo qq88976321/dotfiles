@@ -3,7 +3,7 @@ age = "latest"
 "aqua:iffse/pay-respects" = "latest"
 atuin = "latest"
 biome = "latest"
-chezmoi = "2.70"
+chezmoi = "2.71"
 codex = "latest"
 conftest = "latest"
 crane = "latest"
@@ -18,9 +18,13 @@ k9s = "latest"
 kubecolor = "latest"
 neovim = "latest"
 node = "26"
+"npm:typescript-language-server" = "latest"
 opencode = "latest"
 oras = "latest"
+oxfmt = "latest"
+oxlint = "latest"
 pack = "latest"
+pnpm = "latest"
 python = "3.14"
 rg = "latest"
 # tmux is intentionally NOT managed by mise: the aqua prebuilt build does not emit
@@ -29,10 +33,14 @@ trivy = "latest"
 usage = "latest"
 zellij = "latest"
 zoxide = "latest"
+"npm:typescript" = "latest"
+"go:golang.org/x/tools/gopls" = "latest"
+"aqua:tummychow/git-absorb" = "latest"
+"aqua:vercel-labs/agent-browser" = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["python"]
-# python.uv_venv_auto = true
+# python.uv_venv_auto = source
 # experimental = true
 
 [env]
