@@ -131,6 +131,20 @@ agent_panel_sort = "spaces"
 [ui.toast]
 delivery = "terminal"
 
+[ui.sidebar.spaces]
+row_gap = 1
+rows = [
+  ["state_icon", "workspace"],
+  # ["branch", "git_status"],
+]
+
+[ui.sidebar.agents]
+row_gap = 1
+rows = [
+  ["state_icon", "workspace", "tab"],
+  ["agent"],
+]
+
 ###############################################################
 # Session persistence (tmux: resurrect + continuum)
 ###############################################################
