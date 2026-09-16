@@ -84,6 +84,13 @@ alias t='tig'
 # avoid to clear history
 alias clear='printf "\e[H\e[2J"'
 
+# Ctrl-L must keep the cleared screen: inside herdr plain ED2 (\e[2J) erases
+# those rows instead of scrolling them into history, while CSI 22 J is kitty's
+# "scroll into scrollback, then clear" extension, which herdr honors.
+preserve-clear-screen() { printf '\e[22J\e[H'; zle .clear-screen }
+zle -N preserve-clear-screen
+bindkey '^L' preserve-clear-screen
+
 # change the directory of current shell to chezmoi's source directory
 ccd() {
     cd "$(chezmoi source-path)" || exit
