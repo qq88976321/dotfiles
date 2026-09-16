@@ -81,9 +81,6 @@ alias c='chezmoi'
 # tig
 alias t='tig'
 
-# avoid to clear history
-alias clear='printf "\e[H\e[2J"'
-
 # Ctrl-L must keep the cleared screen: inside herdr plain ED2 (\e[2J) erases
 # those rows instead of scrolling them into history, while CSI 22 J is kitty's
 # "scroll into scrollback, then clear" extension, which herdr honors.
