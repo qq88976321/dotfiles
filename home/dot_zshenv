@@ -70,6 +70,7 @@ fi
 # node
 ###############################################################
 export NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
+export NODE_USE_SYSTEM_CA=1
 
 # https://github.com/nodejs/corepack#environment-variables
 export COREPACK_ENABLE_AUTO_PIN=0
