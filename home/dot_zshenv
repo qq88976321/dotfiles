@@ -74,3 +74,9 @@ export NODE_USE_SYSTEM_CA=1
 
 # https://github.com/nodejs/corepack#environment-variables
 export COREPACK_ENABLE_AUTO_PIN=0
+
+###############################################################
+# rg
+###############################################################
+export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
+
