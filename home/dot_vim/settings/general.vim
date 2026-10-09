@@ -61,10 +61,18 @@ function! s:Osc52Yank() abort
   call echoraw(l:seq)
 endfunction
 
-augroup Osc52Clipboard
-  autocmd!
-  autocmd TextYankPost * call s:Osc52Yank()
-augroup END
+if !empty($WSL_DISTRO_NAME) && has('clipboard')
+  " WSLg bridges the X11 clipboard to the Windows clipboard, so share it
+  " directly: 'y' and 'p' both go through the Windows clipboard, no OSC 52.
+  set clipboard=unnamedplus
+elseif exists('*base64_encode') && exists('*str2blob')
+  " base64_encode()/str2blob() need Vim 9.1.1xxx; without them every yank
+  " would throw an error.
+  augroup Osc52Clipboard
+    autocmd!
+    autocmd TextYankPost * call s:Osc52Yank()
+  augroup END
+endif
 
 set updatetime=100
 
