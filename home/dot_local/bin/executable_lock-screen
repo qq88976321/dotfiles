@@ -1,6 +1,54 @@
 #!/bin/sh
-# Lock with i3lock-fancy and blank the screen right away while locked, then
-# restore the DPMS state (enabled flag and timeouts) that was active before.
+# Lock with a blurred screenshot (lock icon and prompt centred on every
+# monitor, like i3lock-fancy used to) and blank the screen right away while
+# locked, then restore the DPMS state (enabled flag and timeouts) that was
+# active before.
+
+icons=/usr/share/i3lock-fancy/icons
+text="Type password to unlock"
+shot=$(mktemp --suffix=.png)
+image=$(mktemp --suffix=.png)
+trap 'rm -f "$shot" "$image"' EXIT
+
+# Build the lock image before touching DPMS so the monitor never blanks while
+# the desktop is still unlocked.
+build_image() {
+    import -silent -window root "$shot" || return
+    size=$(identify -format '%wx%h' "$shot") || return
+    width=${size%x*}
+    height=${size#*x}
+
+    set --
+    # "1920/531x1080/298+1920+0" -> "1920 1080 1920 0"
+    monitors=$(xrandr --listmonitors |
+        awk 'NR > 1 { split($3, g, "[/x+]"); print g[1], g[3], g[5], g[6] }')
+    [ -n "$monitors" ] || monitors="$width $height 0 0"
+    while read -r w h x y; do
+        cx=$((x + w / 2))
+        cy=$((y + h / 2))
+        # Dark icon and text on a bright background, like i3lock-fancy.
+        brightness=$(convert "$shot" -crop "100x100+$((cx - 50))+$((cy - 50))" \
+            +repage -colorspace hsb -resize 1x1 -format '%[fx:int(100*b)]' info:)
+        if [ "${brightness:-0}" -gt 60 ]; then
+            icon=$icons/lockdark.png color=black
+        else
+            icon=$icons/lock.png color=white
+        fi
+        # Offsets from the centre of the whole image (-gravity center).
+        dx=$((cx - width / 2))
+        dy=$((cy - height / 2))
+        set -- "$@" -fill "$color" -annotate "$(printf '%+d%+d' "$dx" $((dy + 160)))" "$text" \
+            "$icon" -geometry "$(printf '%+d%+d' "$dx" "$dy")" -composite
+    done <<EOF
+$monitors
+EOF
+
+    convert "$shot" -level 0%,100%,0.6 \
+        -filter Gaussian -resize 20% -define filter:sigma=1.5 -resize "${size}!" \
+        -font "$(fc-match sans -f '%{file}')" -pointsize 26 -gravity center \
+        "$@" "$image"
+}
+build_image || : >"$image"
 
 timeouts=$(xset q | awk '/Standby:/ {print $2, $4, $6}')
 if xset q | grep -q 'DPMS is Enabled'; then
@@ -22,6 +70,12 @@ xset +dpms dpms 10 10 10
 # monitor again; the 10s timeout re-blanks it after any later stray input.
 (sleep 1 && xset dpms force off) &
 blank_pid=$!
-# Must block until unlock, otherwise revert runs right away.
-i3lock-fancy --nofork
+# -n blocks until unlock, otherwise revert runs right away. Fall back to a
+# plain black lock screen (never the unblurred shot) if the image could not
+# be built.
+if [ -s "$image" ]; then
+    i3lock -n -i "$image"
+else
+    i3lock -n -c 000000
+fi
 revert
