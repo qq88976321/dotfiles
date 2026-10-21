@@ -4,7 +4,7 @@
 
 MENU="$(rofi -sep "|" -dmenu -i -p 'System' -hide-scrollbar -l 6 <<< " Lock| Logout| Reboot| Suspend| Shutdown")"
 case "$MENU" in
-    *Lock) i3lock-fancy;;
+    *Lock) {{ .chezmoi.homeDir }}/.local/bin/lock-screen;;
     *Logout) i3-msg exit;;
     *Reboot) systemctl reboot;;
 	*Suspend) systemctl suspend;;

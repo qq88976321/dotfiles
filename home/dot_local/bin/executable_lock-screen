@@ -1,0 +1,27 @@
+#!/bin/sh
+# Lock with i3lock-fancy and blank the screen right away while locked, then
+# restore the DPMS state (enabled flag and timeouts) that was active before.
+
+timeouts=$(xset q | awk '/Standby:/ {print $2, $4, $6}')
+if xset q | grep -q 'DPMS is Enabled'; then
+    dpms_flag=+dpms
+else
+    dpms_flag=-dpms
+fi
+
+revert() {
+    kill "$blank_pid" 2>/dev/null
+    # shellcheck disable=SC2086 # split into the three timeout arguments
+    xset dpms $timeouts
+    xset $dpms_flag
+}
+trap revert HUP INT TERM
+
+xset +dpms dpms 10 10 10
+# Delay so the release of the key that triggered the lock does not wake the
+# monitor again; the 10s timeout re-blanks it after any later stray input.
+(sleep 1 && xset dpms force off) &
+blank_pid=$!
+# Must block until unlock, otherwise revert runs right away.
+i3lock-fancy --nofork
+revert
