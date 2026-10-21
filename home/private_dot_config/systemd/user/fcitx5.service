@@ -1,0 +1,12 @@
+[Unit]
+Description=Fcitx5 input method
+
+[Service]
+Type=dbus
+BusName=org.fcitx.Fcitx5
+ExecStart=/usr/bin/fcitx5
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=default.target

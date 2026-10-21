@@ -8,4 +8,5 @@
 .config/polybar
 .config/pulse
 .config/rofi
+.config/systemd/user/fcitx5.service
 {{ end }}

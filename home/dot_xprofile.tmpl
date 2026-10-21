@@ -30,4 +30,12 @@ export QT_IM_MODULE=fcitx
 export GLFW_IM_MODULE=ibus
 export XMODIFIERS=@im=fcitx
 
+# i3 does not run XDG autostart, so fcitx5 runs as a systemd user service
+# (~/.config/systemd/user/fcitx5.service). The user manager starts before X,
+# so an enabled unit comes up without DISPLAY and cannot reach the X server.
+# Hand it the X session's display and (re)start it here; restart also starts
+# the unit on a machine where it was never enabled.
+systemctl --user import-environment DISPLAY XAUTHORITY
+systemctl --user restart fcitx5.service
+
 {{- end }}
