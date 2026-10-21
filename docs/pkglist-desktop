@@ -6,7 +6,9 @@ dunst
 flameshot
 gsimplecal
 i3
-i3lock-fancy
+# i3lock-fancy is installed from upstream, see docs/bootstrap.md
+i3lock
+imagemagick
 kolourpaint
 picom
 polybar

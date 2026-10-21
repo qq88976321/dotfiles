@@ -132,6 +132,15 @@ Skip this whole section on KDE/Kubuntu machines.
 grep -v '^#' docs/pkglist-desktop | xargs sudo apt-get install -y
 ```
 
+- **i3lock-fancy**: install from upstream, not apt (Ubuntu ships a 2016
+  snapshot without the `icons/` directory that `~/.local/bin/lock-screen`
+  reads):
+
+  ```sh
+  git clone https://github.com/meskarune/i3lock-fancy /tmp/i3lock-fancy
+  sudo make -C /tmp/i3lock-fancy install
+  ```
+
 - **vscode**: follow <https://code.visualstudio.com/docs/setup/linux> to add
   the Microsoft apt repository and install `code`.
 - **polybar-pulseaudio-control**: single script, drop into `~/.local/bin`:
