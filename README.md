@@ -43,7 +43,9 @@ These dotfiles and softwares are customized according to personal preferences an
 The installation ways of these tools may vary depending on your Linux distribution. Please refer to their official documentations for more details.
 
 - [i3](https://github.com/i3/i3)
-- [i3lock-fancy](https://github.com/meskarune/i3lock-fancy)
+- [i3lock](https://github.com/i3/i3lock)
+- [i3lock-fancy](https://github.com/meskarune/i3lock-fancy) (upstream; only its lock icons are used)
+- [ImageMagick](https://imagemagick.org)
 - [polybar](https://github.com/polybar/polybar)
 - [rofi](https://github.com/davatorium/rofi)
 - [dunst](https://github.com/dunst-project/dunst)
@@ -107,7 +109,7 @@ Here are my daily used key bindings, which may not include all the key bindings 
 | $mod+`shift`+`c`                        | reload the configuration file                                               |
 | $mod+`shift`+`r`                        | restart i3 inplace                                                          |
 | $mod+`shift`+`e`                        | exit i3                                                                     |
-| `Scroll Lock`                           | lock screen using [i3lock-fancy](https://github.com/meskarune/i3lock-fancy) |
+| `Scroll Lock`                           | lock screen with a blurred screenshot and blank the monitors                |
 | $mod+`r`                                | enter resize mode                                                           |
 | $mod+`mouse right click`                | resize window                                                               |
 
